@@ -1,0 +1,27 @@
+package org.oop.lostfound.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class LoginDAO {
+    private Connection connection; 
+
+    public LoginDAO(Connection connection) {
+        this.connection = connection;
+    }
+
+    public boolean checkLogin(String username,  String user_password) {
+        String sql = "SELECT * FROM pbo_db WHERE username=? AND password=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, username);
+            statement.setString(2, user_password);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+}
