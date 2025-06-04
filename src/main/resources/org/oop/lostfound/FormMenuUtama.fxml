@@ -13,7 +13,7 @@
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="960.0" style="-fx-background-color: #3b3a55;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="6.0" layoutY="7.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
+            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
@@ -45,7 +45,7 @@
             </Button>
             <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="806.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/Log%20Out.png" />
+                  <Image url="@../image/Log%20Out.png" />
                </image>
             </ImageView>
          </children>
@@ -65,22 +65,22 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3da2bb" height="91.0" layoutX="471.0" layoutY="47.0" strokeType="INSIDE" style="-fx-arc-height: 60; -fx-arc-width: 60;" width="182.0" />
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="58.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/Total%20Items.png" />
+                  <Image url="@../image/Total%20Items.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="277.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/Lost%20Items.png" />
+                  <Image url="@../image/Lost%20Items.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="699.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/Total%20Claims.png" />
+                  <Image url="@../image/Total%20Claims.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="488.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/Found%20Items.png" />
+                  <Image url="@../image/Found%20Items.png" />
                </image>
             </ImageView>
             <Label layoutX="38.0" layoutY="158.0" text="Item List">
@@ -93,17 +93,17 @@
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="759.0" layoutY="63.0" text="Total Items" textFill="WHITE">
+            <Label layoutX="759.0" layoutY="63.0" text="Total Claims" textFill="WHITE">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="548.0" layoutY="63.0" text="Total Items" textFill="WHITE">
+            <Label layoutX="548.0" layoutY="63.0" text="Found Items" textFill="WHITE">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="337.0" layoutY="63.0" text="Total Items" textFill="WHITE">
+            <Label layoutX="337.0" layoutY="63.0" text="Lost Items" textFill="WHITE">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>

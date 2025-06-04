@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 
 public class FormMenuUtamaController {
     @FXML
+    private Button lostFoundButton;
+    @FXML
     private Button lostitemButton;
     @FXML
     private Button founditemButton;
@@ -22,6 +24,15 @@ public class FormMenuUtamaController {
     private Button claimButton;
     @FXML
     private Button logoutButton;
+
+    @FXML
+    private void lostFoundButtonOnAction(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
+        Parent parent = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(parent));
+        stage.show();
+    }
 
     @FXML
     private void lostitemButtonOnAction(ActionEvent event) throws IOException {

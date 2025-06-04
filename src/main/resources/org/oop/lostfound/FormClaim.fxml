@@ -47,7 +47,7 @@
             </Button>
             <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="806.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/Log%20Out.png" />
+                  <Image url="@../image/Log%20Out.png" />
                </image>
             </ImageView>
          </children>

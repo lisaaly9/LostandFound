@@ -52,14 +52,16 @@ public class FormLoginController {
     private void loginButtonOnAction(ActionEvent event) throws IOException {
         String username = usernameTextField.getText();
         String user_password = passwordField.getText();
-        if (!username.equals(user_password)) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("PESAN ERROR");
+
+        if (username.isEmpty() || user_password.isEmpty()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("PESAN PERINGATAN");
             alert.setHeaderText(null);
-            alert.setContentText("USERNAME ATAU PASSWORD SALAH");
+            alert.setContentText("USERNAME ATAU PASSWORD TIDAK BOLEH KOSONG!");
             alert.showAndWait();
             return;
         }
+
         LoginDAO loginDAO = new LoginDAO(Connector.getConnection());
         boolean success = loginDAO.checkLogin(username, user_password);
 
@@ -67,7 +69,7 @@ public class FormLoginController {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("PESAN SUKSES");
             alert.setHeaderText(null);
-            alert.setContentText("LOGIN BERHASIL");
+            alert.setContentText("LOGIN BERHASIL SILAHKAN MASUK ^^");
             alert.showAndWait();
             
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
@@ -80,7 +82,7 @@ public class FormLoginController {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("PESAN ERROR");
             alert.setHeaderText(null);
-            alert.setContentText("LOGIN GAGAL");
+            alert.setContentText("USERNAME ATAU PASSWORD SALAH!");
             alert.showAndWait();
             return;
         }

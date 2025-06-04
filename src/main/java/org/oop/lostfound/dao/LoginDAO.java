@@ -13,12 +13,13 @@ public class LoginDAO {
     }
 
     public boolean checkLogin(String username,  String user_password) {
-        String sql = "SELECT * FROM pbo_db WHERE username=? AND password=?";
+        String sql = "SELECT * FROM account WHERE username=? AND user_password=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, username);
             statement.setString(2, user_password);
             ResultSet rs = statement.executeQuery();
-            return rs.next();
+            boolean found = rs.next();
+            return found;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="641.0" fitWidth="975.0" layoutX="-1.0" layoutY="-40.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Background.png" />
+            <Image url="@../image/Background.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#d9d9d9" height="306.0" layoutX="331.0" layoutY="119.0" opacity="0.75" strokeType="INSIDE" width="308.0">
@@ -57,22 +57,22 @@
       </Hyperlink>
       <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="592.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Username.png" />
+            <Image url="@../image/Username.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="592.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Password.png" />
+            <Image url="@../image/Password.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="592.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Phone.png" />
+            <Image url="@../image/Phone.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="592.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Email.png" />
+            <Image url="@../image/Email.png" />
          </image>
       </ImageView>
    </children>

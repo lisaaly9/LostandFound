@@ -81,6 +81,16 @@ public class FormRegisterController {
         String email = emailTextField.getText();
         String user_password = passwordField.getText();
         String retype_password = retypePasswordField.getText();
+
+        if (username.isEmpty() || phone_number.isEmpty() || email.isEmpty() || user_password.isEmpty() || retype_password.isEmpty()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("PESAN PERINGATAN");
+            alert.setHeaderText(null);
+            alert.setContentText("TIDAK BOLEH ADA DATA YANG KOSONG!");
+            alert.showAndWait();
+            return;
+        }
+
         if (!user_password.equals(retype_password)) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("PESAN ERROR");

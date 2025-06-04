@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="641.0" fitWidth="975.0" layoutX="-1.0" layoutY="-40.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Background.png" />
+            <Image url="@../image/Background.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#d9d9d9" height="271.0" layoutX="353.0" layoutY="145.0" opacity="0.75" strokeType="INSIDE" width="254.0">
@@ -54,12 +54,12 @@
       </Hyperlink>
       <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="574.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Username.png" />
+            <Image url="@../image/Username.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="574.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/Password.png" />
+            <Image url="@../image/Password.png" />
          </image>
       </ImageView>
    </children>
