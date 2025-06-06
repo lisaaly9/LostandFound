@@ -1,9 +1,11 @@
 package org.oop.lostfound.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import org.oop.lostfound.enums.Category;
-import org.oop.lostfound.enums.ItemType;
+// import org.oop.lostfound.enums.ItemType;
+import org.oop.lostfound.service.ImageKitService;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LostItemDAO;
 import javafx.event.ActionEvent;
@@ -17,7 +19,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class FormLostItemController {
@@ -43,15 +49,25 @@ public class FormLostItemController {
     private DatePicker dateLostDatePicker;
     @FXML
     private ComboBox<Category> categoryComboBox;
+    // @FXML
+    // private ComboBox<ItemType> typeComboBox;
     @FXML
-    private ComboBox<ItemType> typeComboBox;
+    private Button selectImageButton;
+    @FXML
+    private Label selectedImageLabel;
     @FXML
     private Button submitButton;
 
     @FXML
+    private ImageView imagePreview;
+    
+    private File selectedImageFile;
+    private String uploadedImageUrl;
+
+    @FXML
     private void initialize() {
         categoryComboBox.getItems().setAll(Category.values());
-        typeComboBox.getItems().setAll(ItemType.values());
+        // typeComboBox.getItems().setAll(ItemType.values());
     }
 
     @FXML
@@ -137,17 +153,44 @@ public class FormLostItemController {
         Category selectedCategory = categoryComboBox.getValue();
         if (selectedCategory != null) {
             System.out.println("Kategori dipilih: " + selectedCategory.name());
-            
         }
     }
 
-    @FXML
-    private void typeComboBoxOnAction(ActionEvent event) {
-    ItemType selectedType = typeComboBox.getValue();
-    if (selectedType != null) {
-        System.out.println("Tipe item dipilih: " + selectedType.name());
+    private void showAlert(AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
-}
+
+    @FXML
+    private void selectImageButtonOnAction(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Pilih Foto Barang");
+        
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = 
+            new FileChooser.ExtensionFilter("Image files (*.png, *.jpg, *.jpeg)", 
+                                            "*.PNG", "*.png", "*.JPG", "*.jpg", "*.JPEG", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extFilter);
+        
+        Stage stage = (Stage) selectImageButton.getScene().getWindow();
+        selectedImageFile = fileChooser.showOpenDialog(stage);
+        
+        if (selectedImageFile != null) {
+            selectedImageLabel.setText(selectedImageFile.getName());
+            
+            // Show preview
+            try {
+                Image image = new Image(selectedImageFile.toURI().toString());
+                imagePreview.setImage(image);
+                imagePreview.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
     @FXML
     private void submitButtonOnAction(ActionEvent event) throws IOException {
@@ -156,9 +199,9 @@ public class FormLostItemController {
         String location = locationTextField.getText();
         LocalDate dateLost = dateLostDatePicker.getValue();
         Category category = categoryComboBox.getValue();
-        ItemType type = typeComboBox.getValue();
+        // ItemType type = typeComboBox.getValue();
 
-        if (itemName.isEmpty() || description.isEmpty() || location.isEmpty() || dateLost == null || category == null || type == null )  {
+        if (itemName.isEmpty() || description.isEmpty() || location.isEmpty() || dateLost == null || category == null )  {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("PESAN PERINGATAN");
             alert.setHeaderText(null);
@@ -166,27 +209,46 @@ public class FormLostItemController {
             alert.showAndWait();
             return;
         }
+            // Upload image if selected
+        uploadedImageUrl = null;
+        if (selectedImageFile != null) {
+            try {
+                // Show loading indicator
+                submitButton.setText("Uploading...");
+                submitButton.setDisable(true);
+                
+                // Upload to ImageKit
+                String fileName = System.currentTimeMillis() + "_" + selectedImageFile.getName();
+                uploadedImageUrl = ImageKitService.uploadImage(selectedImageFile, fileName);
+                
+            } catch (Exception e) {
+                submitButton.setText("Submit");
+                submitButton.setDisable(false);
+                showAlert(AlertType.ERROR, "GAGAL", 
+                        "Gagal mengupload gambar: " + e.getMessage());
+                return;
+            }
+        }
+
         LostItemDAO lostitemDAO = new LostItemDAO(Connector.getConnection());
-        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, type);
+        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, uploadedImageUrl);
 
+        submitButton.setText("Submit");
+        submitButton.setDisable(false);
+
+        
         if (success) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("BERHASIL");
-            alert.setHeaderText(null);
-            alert.setContentText("DATA BARANG HILANG BERHASIL DISIMPAN!");
-            alert.showAndWait();
-
+            showAlert(AlertType.INFORMATION, "BERHASIL", 
+                    "DATA BARANG HILANG BERHASIL DISIMPAN!");
+            
+            // Navigate back to main menu
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
             Parent parent = fxmlLoader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(parent));
             stage.show();
         } else { 
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("GAGAL");
-            alert.setHeaderText(null);
-            alert.setContentText("GAGAL MENYIMPAN DATA BARANG HILANG");
-            alert.showAndWait();
+            showAlert(AlertType.ERROR, "GAGAL", "GAGAL MENYIMPAN DATA BARANG HILANG");
         }
 
         // //Debug log

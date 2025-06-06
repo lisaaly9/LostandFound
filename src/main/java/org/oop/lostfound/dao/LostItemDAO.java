@@ -14,15 +14,15 @@ public class LostItemDAO {
         this.connection = connection;
     }
 
-    public boolean insertLostItem(String itemName, String description, String location, LocalDate dateLost, Category category, ItemType type) {
-        String sql = "INSERT INTO lost_item (item_name, description_item, location_item, date_lost, category, item_type) VALUES (?, ?, ?, ?, ?, ?)";
+    public boolean insertLostItem(String itemName, String description, String location, LocalDate dateLost, Category category, String image_url) {
+        String sql = "INSERT INTO lost_item (item_name, description_item, location_item, date_lost, category, image_url) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, itemName);
             stmt.setString(2, description);
             stmt.setString(3, location);
             stmt.setDate(4, java.sql.Date.valueOf(dateLost));
             stmt.setString(5, category.name());
-            stmt.setString(6, type.name());
+            stmt.setString(6, image_url);
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
@@ -30,5 +30,17 @@ public class LostItemDAO {
             return false;
         }
     }
-    
+
+    public int getJumlahLostItems() {
+    String sql = "SELECT COUNT(*) FROM lost_item";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        var rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+    }
 }
