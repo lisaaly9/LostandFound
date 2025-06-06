@@ -30,5 +30,17 @@ public class LostItemDAO {
             return false;
         }
     }
-    
+
+    public int getJumlahLostItems() {
+    String sql = "SELECT COUNT(*) FROM lost_item";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        var rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+    }
 }
