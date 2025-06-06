@@ -6,11 +6,9 @@ import org.oop.lostfound.enums.Category;
 import org.oop.lostfound.enums.ItemType;
 import org.oop.lostfound.model.Item;
 
-class LostItem extends Item implements IReportable
-{
+public class LostItem extends Item implements IReportable {
     @Override
-    public String generateReport()
-    {
+    public String generateReport() {
         return "Laporan Kehilangan: " + getName() + " di lokasi " + getLocation();
     }
 

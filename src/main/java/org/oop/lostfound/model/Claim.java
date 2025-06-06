@@ -1,10 +1,10 @@
 package org.oop.lostfound.model;
 
 import java.util.Date;
-
 import org.oop.lostfound.enums.ClaimStatus;
 
-class Claim {
+//Constructor
+public class Claim {
     private String claimId;
     private Date claimDate;
     private ClaimStatus claimStatus;

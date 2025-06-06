@@ -18,17 +18,17 @@
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
             </Button>
-            <Button fx:id="lostitemButton" layoutX="226.0" layoutY="23.0" mnemonicParsing="false" onAction="#lostitemButtonOnAction" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
+            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="23.0" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="founditemButton" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" onAction="#founditemButtonOnAction" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
+            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="reportuserButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" onAction="#reportuserButtonOnAction" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
+            <Button fx:id="reportButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="logoutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
+            <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>

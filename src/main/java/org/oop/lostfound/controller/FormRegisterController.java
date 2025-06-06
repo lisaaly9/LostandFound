@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.RegisterDAO;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;

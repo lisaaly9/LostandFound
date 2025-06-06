@@ -15,15 +15,15 @@ public class FormMenuUtamaController {
     @FXML
     private Button lostFoundButton;
     @FXML
-    private Button lostitemButton;
+    private Button lostItemButton;
     @FXML
-    private Button founditemButton;
+    private Button foundItemButton;
     @FXML
-    private Button reportuserButton;
+    private Button reportButton;
     @FXML
     private Button claimButton;
     @FXML
-    private Button logoutButton;
+    private Button logOutButton;
 
     @FXML
     private void lostFoundButtonOnAction(ActionEvent event) throws IOException {
@@ -35,7 +35,7 @@ public class FormMenuUtamaController {
     }
 
     @FXML
-    private void lostitemButtonOnAction(ActionEvent event) throws IOException {
+    private void lostItemButtonOnAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormLostItem.fxml"));
         Parent parent = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -44,7 +44,7 @@ public class FormMenuUtamaController {
     }
 
     @FXML
-    private void founditemButtonOnAction(ActionEvent event) throws IOException {
+    private void foundItemButtonOnAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormFoundItem.fxml"));
         Parent parent = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -53,7 +53,7 @@ public class FormMenuUtamaController {
     }
 
     @FXML
-    private void reportuserButtonOnAction(ActionEvent event) throws IOException {
+    private void reportButtonOnAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormReportUser.fxml"));
         Parent parent = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -71,7 +71,7 @@ public class FormMenuUtamaController {
     }
 
     @FXML
-    private void logoutButtonOnAction(ActionEvent event) throws IOException {
+    private void logOutButtonOnAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormLogin.fxml"));
         Parent parent = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
