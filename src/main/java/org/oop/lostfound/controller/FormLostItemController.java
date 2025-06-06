@@ -251,13 +251,6 @@ public class FormLostItemController {
             showAlert(AlertType.ERROR, "GAGAL", "GAGAL MENYIMPAN DATA BARANG HILANG");
         }
 
-        // //Debug log
-        // System.out.println("Item Name: " + itemName);
-        // System.out.println("Description: " + description);
-        // System.out.println("Location: " + location);
-        // System.out.println("Date Lost: " + dateLost);
-        // System.out.println("Category: " + category.name());
-        // System.out.println("Type: " + type.name());
-
+        
     }
 }
