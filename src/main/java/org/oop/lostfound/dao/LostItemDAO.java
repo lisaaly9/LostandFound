@@ -14,8 +14,8 @@ public class LostItemDAO {
         this.connection = connection;
     }
 
-    public boolean insertLostItem(String itemName, String description, String location, LocalDate dateLost, Category category, String image_url) {
-        String sql = "INSERT INTO lost_item (item_name, description_item, location_item, date_lost, category, image_url) VALUES (?, ?, ?, ?, ?, ?)";
+    public boolean insertLostItem(String itemName, String description, String location, LocalDate dateLost, Category category, String image_url, String contact) {
+        String sql = "INSERT INTO lost_item (item_name, description_item, location_item, date_lost, category, image_url, contact) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, itemName);
             stmt.setString(2, description);
@@ -23,6 +23,7 @@ public class LostItemDAO {
             stmt.setDate(4, java.sql.Date.valueOf(dateLost));
             stmt.setString(5, category.name());
             stmt.setString(6, image_url);
+            stmt.setString(7, contact);
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import org.oop.lostfound.enums.Category;
-// import org.oop.lostfound.enums.ItemType;
 import org.oop.lostfound.service.ImageKitService;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LostItemDAO;
@@ -49,18 +48,17 @@ public class FormLostItemController {
     private DatePicker dateLostDatePicker;
     @FXML
     private ComboBox<Category> categoryComboBox;
-    // @FXML
-    // private ComboBox<ItemType> typeComboBox;
     @FXML
     private Button selectImageButton;
     @FXML
     private Label selectedImageLabel;
     @FXML
+    private TextField contactTextField;
+    @FXML
     private Button submitButton;
 
     @FXML
     private ImageView imagePreview;
-    
     private File selectedImageFile;
     private String uploadedImageUrl;
 
@@ -191,6 +189,12 @@ public class FormLostItemController {
             }
         }
     }
+
+    @FXML
+    private void contactTextFieldOnAction(ActionEvent event) {
+        Stage stage = (Stage) contactTextField.getScene().getWindow();
+        stage.close();
+    }
     
     @FXML
     private void submitButtonOnAction(ActionEvent event) throws IOException {
@@ -199,9 +203,9 @@ public class FormLostItemController {
         String location = locationTextField.getText();
         LocalDate dateLost = dateLostDatePicker.getValue();
         Category category = categoryComboBox.getValue();
-        // ItemType type = typeComboBox.getValue();
+        String contact = contactTextField.getText();
 
-        if (itemName.isEmpty() || description.isEmpty() || location.isEmpty() || dateLost == null || category == null )  {
+        if (itemName.isEmpty() || description.isEmpty() || location.isEmpty() || dateLost == null || category == null || contact.isEmpty())  {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("PESAN PERINGATAN");
             alert.setHeaderText(null);
@@ -231,7 +235,7 @@ public class FormLostItemController {
         }
 
         LostItemDAO lostitemDAO = new LostItemDAO(Connector.getConnection());
-        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, uploadedImageUrl);
+        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, uploadedImageUrl, contact);
 
         submitButton.setText("Submit");
         submitButton.setDisable(false);
