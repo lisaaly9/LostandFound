@@ -12,16 +12,19 @@ public class LoginDAO {
         this.connection = connection;
     }
 
-    public boolean checkLogin(String username,  String user_password) {
-        String sql = "SELECT * FROM pbo_db WHERE username=? AND password=?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, username);
-            statement.setString(2, user_password);
-            ResultSet rs = statement.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+    public boolean checkLogin(String usernameOrEmail, String user_password) {
+    String sql = "SELECT * FROM account WHERE (username = ? OR email = ?) AND user_password = ?";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, usernameOrEmail); // untuk username
+        statement.setString(2, usernameOrEmail); // untuk email
+        statement.setString(3, user_password);
+        ResultSet rs = statement.executeQuery();
+        boolean found = rs.next();
+        return found;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
         }
     }
+
 }

@@ -52,11 +52,11 @@ public class FormLoginController {
     private void loginButtonOnAction(ActionEvent event) throws IOException {
         String username = usernameTextField.getText();
         String user_password = passwordField.getText();
-        if (!username.equals(user_password)) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("PESAN ERROR");
+        if (username.isEmpty() || user_password.isEmpty()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("PESAN PERINGATAN");
             alert.setHeaderText(null);
-            alert.setContentText("USERNAME ATAU PASSWORD SALAH");
+            alert.setContentText("Username atau Password tidak boleh kosong!");
             alert.showAndWait();
             return;
         }
