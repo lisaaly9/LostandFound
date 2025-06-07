@@ -1,27 +1,26 @@
 package org.oop.lostfound.controller;
 
-import javafx.stage.Stage;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.net.URL;
+import org.oop.lostfound.dao.ReportDAO;
+import org.oop.lostfound.model.Report;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import java.io.IOException;
-import java.net.URL;
-
-import javafx.scene.control.Label;
-import java.sql.Connection;
-import java.util.ResourceBundle;
-
-import org.oop.lostfound.dao.Connector;
-import org.oop.lostfound.dao.LostItemDAO;
-import org.oop.lostfound.dao.FoundItemDAO;
-// import org.oop.lostfound.dao.ClaimDAO;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
-public class FormMenuUtamaController implements javafx.fxml.Initializable {
+public class FormReportUserController implements Initializable {
     @FXML
     private Button lostFoundButton;
     @FXML
@@ -33,52 +32,26 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
     @FXML
     private Button claimButton;
     @FXML
-    private Button logOutButton;
-    
-    // Label untuk setiap counter di dashboard
-    @FXML
-    private Label totalItemsCountLabel;
-    @FXML
-    private Label lostItemsCountLabel;
-    @FXML
-    private Label foundItemsCountLabel;
-    @FXML
-    private Label totalClaimsCountLabel;
+    private Button logOutButton; 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        updateDashboardData();
-    }
-    
     @FXML
-    public void updateDashboardData(){
-        try {
-            Connection connection = Connector.getConnection();
-            LostItemDAO lostItemDAO = new LostItemDAO(connection);
-            FoundItemDAO foundItemDAO = new FoundItemDAO(connection);
-            
-            // Ambil data dari database
-            int jumlahLostItems = lostItemDAO.getJumlahLostItems();
-            int jumlahFoundItems = foundItemDAO.getJumlahFoundItems(); 
-            int totalClaims = 0; // Ganti dengan method yang sesuai jika ClaimDAO sudah ada
-            int totalItems = jumlahLostItems + jumlahFoundItems;
+    private TableView<Report> tableReport;
+    @FXML 
+    private TableColumn<Report, Integer> columnReportId;
+    @FXML 
+    private TableColumn<Report, String> columnUser;
+    @FXML
+    private TableColumn<Report, String> columnItemName;
+    @FXML 
+    private TableColumn<Report, String> columnType;
+    @FXML 
+    private TableColumn<Report, String> columnLocation;
+    @FXML 
+    private TableColumn<Report, LocalDate> columnDate;
+    @FXML 
+    private TableColumn<Report, String> columnContact;
 
-            // Update masing-masing label dengan angka saja
-            totalItemsCountLabel.setText(String.valueOf(totalItems));
-            lostItemsCountLabel.setText(String.valueOf(jumlahLostItems));
-            foundItemsCountLabel.setText(String.valueOf(jumlahFoundItems));
-            totalClaimsCountLabel.setText(String.valueOf(totalClaims));
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Set nilai default jika terjadi error
-            totalItemsCountLabel.setText("0");
-            lostItemsCountLabel.setText("Error");
-            foundItemsCountLabel.setText("0");
-            totalClaimsCountLabel.setText("0");
-        }
-    }
-    
+
     @FXML
     private void lostFoundButtonOnAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
@@ -132,4 +105,36 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
         stage.setScene(new Scene(parent));
         stage.show();
     }
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        columnReportId.setCellValueFactory(new PropertyValueFactory<>("reportId"));
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("user"));
+        columnItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        columnLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        columnContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+
+        // Styling untuk header kolom
+        tableReport.setStyle("-fx-background-color: white;");
+        
+        // Styling individual untuk setiap header kolom
+        columnReportId.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
+        columnUser.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
+        columnItemName.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
+        columnType.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
+        columnLocation.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
+        columnDate.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
+        columnContact.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
+
+        loadAllReports();
+    }
+
+    private void loadAllReports() {
+        List<Report> reports = ReportDAO.getAllReports();
+        tableReport.getItems().setAll(reports);
+    }
+
+
 }

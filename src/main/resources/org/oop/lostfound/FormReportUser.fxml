@@ -11,36 +11,36 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormReportUserController">
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="960.0" style="-fx-background-color: #3b3a55;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutY="7.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
+            <Button fx:id="lostFoundButton" onAction="#lostFoundButtonOnAction" layoutY="7.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
             </Button>
-            <Button layoutX="226.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
+            <Button fx:id="lostItemButton" onAction="#lostItemButtonOnAction" layoutX="226.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="320.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
+            <Button fx:id="foundItemButton" onAction="#foundItemButtonOnAction" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="429.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
+            <Button fx:id="reportButton" onAction="#reportButtonOnAction" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="503.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparant;" text="Claim" textFill="WHITE">
+            <Button fx:id="claimButton" onAction="#claimButtonOnAction" layoutX="503.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparant;" text="Claim" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
+            <Button fx:id="logOutButton" onAction="#logOutButtonOnAction" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -62,15 +62,15 @@
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
-            <TableView layoutX="90.0" layoutY="64.0" prefHeight="327.0" prefWidth="782.0" style="-fx-background-color: #e9f3f2; -fx-border-color: #3d5a7e; -fx-text-fill: white;">
+            <TableView fx:id="tableReport" layoutX="90.0" layoutY="64.0" prefHeight="327.0" prefWidth="782.0" style="-fx-border-color: #3d5a7e; -fx-background-color: white;">
               <columns>
-                <TableColumn prefWidth="110.0" sortable="false" style="-fx-text-fill: white; -fx-background-color: #318991;" text="Report Id" />
-                <TableColumn prefWidth="110.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Report Type" />
-                  <TableColumn prefWidth="110.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Report Date" />
-                  <TableColumn prefWidth="110.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Status" />
-                  <TableColumn prefWidth="110.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="User" />
-                  <TableColumn prefWidth="110.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Item" />
-                  <TableColumn prefWidth="120.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Action" />
+                <TableColumn fx:id="columnReportId" prefWidth="110.0" sortable="false" style="-fx-background-color: #318991;" text="Report Id" />
+                <TableColumn fx:id="columnType" prefWidth="110.0" style="-fx-background-color: #318991;" text="Report Type" />
+                <TableColumn fx:id="columnDate" prefWidth="110.0" style="-fx-background-color: #318991;" text="Report Date" />
+                <TableColumn fx:id="columnUser" prefWidth="110.0" style="-fx-background-color: #318991;" text="User" />
+                <TableColumn fx:id="columnItemName" prefWidth="110.0" style="-fx-background-color: #318991;" text="Item" />
+                <TableColumn fx:id="columnLocation" prefWidth="110.0" style="-fx-background-color: #318991;" text="Location" />
+                <TableColumn fx:id="columnContact" prefWidth="120.0" style="-fx-background-color: #318991;" text="Contact" />
               </columns>
             </TableView>
          </children>

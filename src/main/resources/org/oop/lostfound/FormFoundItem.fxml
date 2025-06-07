@@ -12,43 +12,43 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormFoundItemController">
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="960.0" style="-fx-background-color: #3b3a55;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="6.0" layoutY="7.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
+            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
             </Button>
-            <Button layoutX="226.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
+            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="23.0" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="320.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
+            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="429.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
+            <Button fx:id="reportButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="503.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparant;" text="Claim" textFill="WHITE">
+            <Button fx:id="claimButton" layoutX="503.0" layoutY="23.0" mnemonicParsing="false" onAction="#claimButtonOnAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparant;" text="Claim" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
+            <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
             <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="806.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/Log%20Out.png" />
+                  <Image url="@../image/Log%20Out.png" />
                </image>
             </ImageView>
          </children>
@@ -57,15 +57,10 @@
    <bottom>
       <AnchorPane prefHeight="515.0" prefWidth="960.0" style="-fx-background-color: #e9f3f2; -fx-border-image-insets: grey;" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="420.0" layoutX="60.0" layoutY="39.0" strokeType="INSIDE" width="841.0" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="374.0" layoutX="60.0" layoutY="70.0" strokeType="INSIDE" width="841.0" />
             <Label layoutX="38.0" layoutY="12.0" text="Found Item">
                <font>
                   <Font name="Arial Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="90.0" layoutY="50.0" prefHeight="16.0" prefWidth="779.0" text="Finder ID">
-               <font>
-                  <Font name="Arial Bold" size="12.0" />
                </font>
             </Label>
             <Label layoutX="90.0" layoutY="92.0" prefHeight="16.0" prefWidth="779.0" text="Item Name">
@@ -88,7 +83,7 @@
                   <Font name="Arial Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="91.0" layoutY="265.0" prefHeight="16.0" prefWidth="779.0" text="Date Lost">
+            <Label layoutX="91.0" layoutY="265.0" prefHeight="16.0" prefWidth="779.0" text="Date Found">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
@@ -98,26 +93,32 @@
                   <Font name="Arial Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="90.0" layoutY="349.0" prefHeight="16.0" prefWidth="779.0" text="Type">
-               <font>
-                  <Font name="Arial Bold" size="12.0" />
-               </font>
-            </Label>
-            <TextField layoutX="90.0" layoutY="66.0" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
-            <TextField layoutX="90.0" layoutY="108.0" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
-            <TextField layoutX="91.0" layoutY="150.0" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
-            <TextField layoutX="90.0" layoutY="192.0" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
-            <Button layoutX="90.0" layoutY="237.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="168.0" style="-fx-background-color: #d9d9d9; -fx-background-radius: 10;" text="Choose File" />
-            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="405.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true" />
-            <DatePicker layoutX="90.0" layoutY="278.0" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
-            <ComboBox layoutX="90.0" layoutY="320.0" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
-            <ComboBox layoutX="90.0" layoutY="365.0" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
-            <Button alignment="CENTER" layoutX="376.0" layoutY="410.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="209.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Submit" textFill="WHITE">
+            <TextField fx:id="itemNameTextField" layoutX="90.0" layoutY="108.0" onAction="#itemNameTextFieldOnAction" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
+            <TextField fx:id="descriptionTextField" layoutX="91.0" layoutY="150.0" onAction="#descriptionTextFieldOnAction" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
+            <TextField fx:id="locationTextField" layoutX="90.0" layoutY="192.0" onAction="#locationTextFieldOnAction" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
+            <Button fx:id="selectImageButton" layoutX="90.0" layoutY="237.0" mnemonicParsing="false" onAction="#selectImageButtonOnAction" prefHeight="13.0" prefWidth="168.0" style="-fx-background-color: #d9d9d9; -fx-background-radius: 10;" text="Choose File" />
+            <DatePicker fx:id="dateFoundDatePicker" layoutX="90.0" layoutY="278.0" onAction="#dateFoundDatePickerOnAction" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
+            <ComboBox fx:id="categoryComboBox" layoutX="90.0" layoutY="320.0" onAction="#categoryComboBoxOnAction" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
+            <Button fx:id="submitButton" alignment="CENTER" layoutX="376.0" layoutY="395.0" mnemonicParsing="false" onAction="#submitButtonOnAction" prefHeight="30.0" prefWidth="209.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Submit" textFill="WHITE">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
             </Button>
+            <Label layoutX="90.0" layoutY="347.0" prefHeight="16.0" prefWidth="779.0" text="Contact">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="contactTextField" layoutX="91.0" layoutY="363.0" onAction="#contactTextFieldOnAction" prefHeight="25.0" prefWidth="779.0" style="-fx-background-color: transparant; -fx-border-color: #000000; -fx-border-width: 0px-0px 1px 0px;" />
+            <Label fx:id="selectedImageLabel" alignment="CENTER_LEFT" layoutX="277.0" layoutY="235.0" prefHeight="30.0" prefWidth="450.0" text="Belum ada foto dipilih" textFill="#666666">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </bottom>
 </BorderPane>
+
+
+
