@@ -21,7 +21,7 @@ public class FoundItem extends Item implements IReportable {
     }
 
     public void setDetails(String name, String description, String location,
-                           Category category, String contact, String imageUrl, LocalDate date) {
+                        Category category, String contact, String imageUrl, LocalDate date) {
         setName(name);
         setDescription(description);
         setLocation(location);
@@ -29,5 +29,13 @@ public class FoundItem extends Item implements IReportable {
         setContact(contact);
         setImageUrl(imageUrl);
         setDate(date);
+    }
+
+    public String getNamaBarang() {
+        return name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
