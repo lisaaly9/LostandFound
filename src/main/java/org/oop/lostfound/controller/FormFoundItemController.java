@@ -235,7 +235,7 @@ public class FormFoundItemController {
         }
 
         FoundItemDAO founditemDAO = new FoundItemDAO(Connector.getConnection());
-        boolean success = founditemDAO.insertFoundItem(itemName, description, location, uploadedImageUrl, dateFound, category, contact);
+        boolean success = founditemDAO.insertFoundItem(itemName, description, location, uploadedImageUrl, dateFound, category, contact, 1);
 
         submitButton.setText("Submit");
         submitButton.setDisable(false);
