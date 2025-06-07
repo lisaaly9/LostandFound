@@ -12,8 +12,7 @@ import java.util.ResourceBundle;
 
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LostItemDAO;
-// Import FoundItemDAO jika sudah ada
-// import org.oop.lostfound.dao.FoundItemDAO;
+import org.oop.lostfound.dao.FoundItemDAO;
 // import org.oop.lostfound.dao.ClaimDAO;
 
 import javafx.fxml.FXMLLoader;
@@ -56,10 +55,11 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
         try {
             Connection connection = Connector.getConnection();
             LostItemDAO lostItemDAO = new LostItemDAO(connection);
+            FoundItemDAO foundItemDAO = new FoundItemDAO(connection);
             
             // Ambil data dari database
             int jumlahLostItems = lostItemDAO.getJumlahLostItems();
-            int jumlahFoundItems = 0; // Ganti dengan method yang sesuai jika FoundItemDAO sudah ada
+            int jumlahFoundItems = foundItemDAO.getJumlahFoundItems(); 
             int totalClaims = 0; // Ganti dengan method yang sesuai jika ClaimDAO sudah ada
             int totalItems = jumlahLostItems + jumlahFoundItems;
 
