@@ -21,35 +21,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class FormReportUserController implements Initializable {
-    @FXML
-    private Button lostFoundButton;
-    @FXML
-    private Button lostItemButton;
-    @FXML
-    private Button foundItemButton;
-    @FXML
-    private Button reportButton;
-    @FXML
-    private Button claimButton;
-    @FXML
-    private Button logOutButton; 
+    @FXML private Button lostFoundButton;
+    @FXML private Button lostItemButton;
+    @FXML private Button foundItemButton;
+    @FXML private Button reportButton;
+    @FXML private Button claimButton;
+    @FXML private Button logOutButton; 
 
-    @FXML
-    private TableView<Report> tableReport;
-    @FXML 
-    private TableColumn<Report, Integer> columnReportId;
-    @FXML 
-    private TableColumn<Report, String> columnUser;
-    @FXML
-    private TableColumn<Report, String> columnItemName;
-    @FXML 
-    private TableColumn<Report, String> columnType;
-    @FXML 
-    private TableColumn<Report, String> columnLocation;
-    @FXML 
-    private TableColumn<Report, LocalDate> columnDate;
-    @FXML 
-    private TableColumn<Report, String> columnContact;
+    @FXML private TableView<Report> tableReport;
+    @FXML private TableColumn<Report, Integer> columnReportId;
+    @FXML private TableColumn<Report, String> columnUser;
+    @FXML private TableColumn<Report, String> columnItemName;
+    @FXML private TableColumn<Report, String> columnType;
+    @FXML private TableColumn<Report, String> columnLocation;
+    @FXML private TableColumn<Report, LocalDate> columnDate;
+    @FXML private TableColumn<Report, String> columnContact;
 
 
     @FXML

@@ -13,8 +13,7 @@ public abstract class Item {
     protected String imageUrl;
     protected LocalDate date;
 
-    public Item(int id, String name, String description, String location, Category category,
-                String contact, String imageUrl, LocalDate date) {
+    public Item(int id, String name, String description, String location, Category category, String contact, String imageUrl, LocalDate date) {
         this.id = id;
         this.name = name;
         this.description = description;

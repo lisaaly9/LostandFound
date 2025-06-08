@@ -5,56 +5,36 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.net.URL;
-
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.sql.Connection;
 import java.util.ResourceBundle;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.fxml.FXML;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LostItemDAO;
 import org.oop.lostfound.dao.FoundItemDAO;
 // import org.oop.lostfound.dao.ClaimDAO;
 
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.fxml.FXML;
-
 public class FormMenuUtamaController implements javafx.fxml.Initializable {
-    @FXML
-    private Button lostFoundButton;
-    @FXML
-    private Button lostItemButton;
-    @FXML
-    private Button foundItemButton;
-    @FXML
-    private Button reportButton;
-    @FXML
-    private Button claimButton;
-    @FXML
-    private Button logOutButton;
+    @FXML private Button lostFoundButton;
+    @FXML private Button lostItemButton;
+    @FXML private Button foundItemButton;
+    @FXML private Button reportButton;
+    @FXML private Button claimButton;
+    @FXML private Button logOutButton;
     
     // Label untuk setiap counter di dashboard
-    @FXML
-    private Label totalItemsCountLabel;
-    @FXML
-    private Label lostItemsCountLabel;
-    @FXML
-    private Label foundItemsCountLabel;
-    @FXML
-    private Label totalClaimsCountLabel;
-    @FXML
-    private VBox itemListContainer;
-    @FXML
-    private FlowPane flowPane;
+    @FXML private Label totalItemsCountLabel;
+    @FXML private Label lostItemsCountLabel;
+    @FXML private Label foundItemsCountLabel;
+    @FXML private Label totalClaimsCountLabel;
+    @FXML private VBox itemListContainer;
+    @FXML private FlowPane flowPane;
 
 
     @Override
@@ -62,15 +42,13 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
         updateDashboardData();
         loadItemList();
     }
-
-    /**
-     * Membuat VBox sederhana untuk menampilkan nama barang dan gambar (jika ada URL gambar).
-     */
+    
+    // Membuat HBox yang berisi informasi singkat tentang item 
     private VBox createItemVBox(String namaBarang, String imageUrl) {
         VBox box = new VBox();
         Label nameLabel = new Label(namaBarang);
         box.getChildren().add(nameLabel);
-        // Jika ingin menampilkan gambar, tambahkan kode berikut:
+        // untuk menampilkan gambar
         if (imageUrl != null && !imageUrl.isEmpty()) {
             try {
                 javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(new javafx.scene.image.Image(imageUrl));
@@ -90,21 +68,19 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
             LostItemDAO lostItemDAO = new LostItemDAO(connection);
             FoundItemDAO foundItemDAO = new FoundItemDAO(connection);
 
-            itemListContainer.getChildren().clear(); // Clear existing
+            itemListContainer.getChildren().clear(); 
 
             // Ambil semua item dari DB
-            java.util.List<?> lostItems = lostItemDAO.getAllLostItems();  // Pastikan method ini mengembalikan List
-            java.util.List<?> foundItems = foundItemDAO.getAllFoundItems(); // Pastikan method ini mengembalikan List
+            java.util.List<?> lostItems = lostItemDAO.getAllLostItems();  
+            java.util.List<?> foundItems = foundItemDAO.getAllFoundItems(); 
 
             // Gabungkan dan tampilkan semua item
             for (var item : lostItems) {
-                // Cast to the correct type, e.g., LostItem
                 org.oop.lostfound.model.LostItem lostItem = (org.oop.lostfound.model.LostItem) item;
                 itemListContainer.getChildren().add(createItemVBox(lostItem.getNamaBarang(), lostItem.getImageUrl()));
             }
             
             for (var item : foundItems) {
-                // Cast to the correct type, e.g., FoundItem
                 org.oop.lostfound.model.FoundItem foundItem = (org.oop.lostfound.model.FoundItem) item;
                 itemListContainer.getChildren().add(createItemVBox(foundItem.getNamaBarang(), foundItem.getImageUrl()));
             }

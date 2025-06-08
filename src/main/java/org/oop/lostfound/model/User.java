@@ -1,11 +1,11 @@
 package org.oop.lostfound.model;
 
-//import java.util.ArrayList;
-
+//Encapsulation
 public class User {
    private int id;
     private String username;
 
+    //Konstruktor
     public User(int id, String username) {
         this.id = id;
         this.username = username;
@@ -14,10 +14,11 @@ public class User {
     public int getId() { return id; }
     public String getUsername() { return username; }
 
+
+    //digunakan nanti
     // public void tambahClaim(Claim claim) {
     //     daftarClaim.add(claim);
     // }
-
     // public ArrayList<Claim> getDaftarClaim() {
     //     return daftarClaim;
     // }

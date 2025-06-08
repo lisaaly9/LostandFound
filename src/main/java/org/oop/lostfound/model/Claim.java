@@ -10,8 +10,7 @@ public class Claim {
     private String user;
     private String itemName;
 
-    public Claim(int claimId, LocalDate claimDate, ClaimStatus status, 
-                 String user, String itemName) {
+    public Claim(int claimId, LocalDate claimDate, ClaimStatus status, String user, String itemName) {
         this.claimId = claimId;
         this.claimDate = claimDate;
         this.status = status;
@@ -19,7 +18,7 @@ public class Claim {
         this.itemName = itemName;
     }
 
-    // Getter methods
+    // Getter & Setter
     public int getClaimId() { return claimId; }
     public void setClaimId(int claimId) { this.claimId = claimId; }
 

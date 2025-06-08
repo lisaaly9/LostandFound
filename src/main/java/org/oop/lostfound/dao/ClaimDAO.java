@@ -3,11 +3,12 @@ package org.oop.lostfound.dao;
 import org.oop.lostfound.model.Claim;
 import org.oop.lostfound.enums.ClaimStatus;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClaimDAO {
+
+    // Mengambil semua data klaim dari tabel claim
     public static List<Claim> getAllClaims() {
         List<Claim> claims = new ArrayList<>();
 
@@ -44,12 +45,11 @@ public class ClaimDAO {
         return claims;
     }
 
+    // Menyimpan data klaim baru ke tabel claim
     public static void createClaim(Integer accountId, Integer foundItemId) throws SQLException {
         String query = "INSERT INTO claims (id_account, id_found_item, status) VALUES (?, ?, ?)";
-        
         try (Connection conn = Connector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            
             stmt.setInt(1, accountId);
             stmt.setInt(2, foundItemId);
             stmt.setString(3, ClaimStatus.PENDING.name());
@@ -57,12 +57,11 @@ public class ClaimDAO {
         }
     }
 
+    // Mengubah status klaim berdasarkan ID klaim
     public static void updateClaimStatus(Integer claimId, ClaimStatus status) throws SQLException {
         String query = "UPDATE claims SET status = ? WHERE id_claim = ?";
-        
         try (Connection conn = Connector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            
             stmt.setString(1, status.name());
             stmt.setInt(2, claimId);
             stmt.executeUpdate();

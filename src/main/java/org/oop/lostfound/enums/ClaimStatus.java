@@ -1,7 +1,7 @@
 package org.oop.lostfound.enums;
 
 public enum ClaimStatus { 
-    PENDING("PENDING", "#FFA500" ), 
+    PENDING("Pending", "#FFA500" ), 
     APPROVED("Approved", "#4CAF50"),
     REJECTED("Rejected", "#F44336");
 

@@ -4,12 +4,6 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
-import java.sql.SQLException;
-import org.oop.lostfound.config.Session;
-import org.oop.lostfound.dao.Connector;
-import org.oop.lostfound.dao.LoginDAO;
-import org.oop.lostfound.model.User;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
@@ -20,23 +14,25 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
+import org.oop.lostfound.config.Session;
+import org.oop.lostfound.dao.Connector;
+import org.oop.lostfound.dao.LoginDAO;
+import org.oop.lostfound.model.User;
 
 
 public class FormLoginController {
-    @FXML
-    private TextField usernameTextField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Hyperlink registerHyperlink;
-    @FXML
-    private Button loginButton;
+    @FXML private TextField usernameTextField;
+    @FXML private PasswordField passwordField;
+    @FXML private Hyperlink registerHyperlink;
+    @FXML private Button loginButton;
     
+    //diinisialisasi, session user direset (logout)
     @FXML
     public void initialize() {
         Session.setId(0);
         Session.setUsername(null);
     }
+
     @FXML
     private void usernameTextFieldOnAction(ActionEvent event) {
         Stage stage = (Stage) usernameTextField.getScene().getWindow();
@@ -97,8 +93,4 @@ public class FormLoginController {
             }
         
     }
-
-
-
-
 }

@@ -2,19 +2,10 @@ package org.oop.lostfound.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,40 +13,29 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.oop.lostfound.dao.ClaimDAO;
+//import org.oop.lostfound.dao.ClaimDAO;
 import org.oop.lostfound.model.Claim;
 import org.oop.lostfound.enums.ClaimStatus;
 import javafx.fxml.FXMLLoader;
 
 public class FormClaimController implements Initializable {
 
-    @FXML
-    private Button lostFoundButton;
-    @FXML
-    private Button lostItemButton;
-    @FXML
-    private Button foundItemButton;
-    @FXML
-    private Button reportButton;
-    @FXML
-    private Button claimButton;
-    @FXML
-    private Button logOutButton; 
+    // Navigasi tombol antar halaman
+    @FXML private Button lostFoundButton;
+    @FXML private Button lostItemButton;
+    @FXML private Button foundItemButton;
+    @FXML private Button reportButton;
+    @FXML private Button claimButton;
+    @FXML private Button logOutButton; 
 
-    @FXML
-    private TableView<Claim> tableClaim;
-    @FXML 
-    private TableColumn<Claim, Integer> columnClaimId;
-    @FXML 
-    private TableColumn<Claim, String> columnClaimDate;
-    @FXML
-    private TableColumn<Claim, ClaimStatus> columnStatus;
-    @FXML 
-    private TableColumn<Claim, String> columnUser;
-    @FXML 
-    private TableColumn<Claim, String> columnItemName;
-    @FXML 
-    private TableColumn<Claim, Void> columnAction;
+    // Tabel Claim
+    @FXML private TableView<Claim> tableClaim;
+    @FXML private TableColumn<Claim, Integer> columnClaimId;
+    @FXML private TableColumn<Claim, String> columnClaimDate;
+    @FXML private TableColumn<Claim, ClaimStatus> columnStatus;
+    @FXML private TableColumn<Claim, String> columnUser;
+    @FXML private TableColumn<Claim, String> columnItemName;
+    @FXML private TableColumn<Claim, Void> columnAction;
 
     @FXML
     private void lostFoundButtonOnAction(ActionEvent event) throws IOException {
@@ -116,5 +96,7 @@ public class FormClaimController implements Initializable {
         // TODO Auto-generated method stub
        // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
     }
+
+    
     
 }

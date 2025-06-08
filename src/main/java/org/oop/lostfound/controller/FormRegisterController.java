@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.Scene;
 import java.io.IOException;
-import java.sql.Connection;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.RegisterDAO;
 import javafx.fxml.FXMLLoader;
@@ -20,20 +19,13 @@ import javafx.scene.control.PasswordField;
 
 
 public class FormRegisterController {
-    @FXML
-    private TextField usernameTextField;
-    @FXML
-    private TextField phoneTextField;
-    @FXML
-    private TextField emailTextField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private PasswordField retypePasswordField;
-    @FXML
-    private Hyperlink loginHyperlink;
-    @FXML
-    private Button registerButton;
+    @FXML private TextField usernameTextField;
+    @FXML private TextField phoneTextField;
+    @FXML private TextField emailTextField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField retypePasswordField;
+    @FXML private Hyperlink loginHyperlink;
+    @FXML private Button registerButton;
     
     @FXML
     private void usernameTextFieldOnAction(ActionEvent event) {
@@ -98,6 +90,7 @@ public class FormRegisterController {
             alert.showAndWait();
             return;
         }
+
         RegisterDAO registerDAO = new RegisterDAO(Connector.getConnection());
         boolean success = registerDAO.registerUser(username, phone_number, email, user_password);
 
@@ -123,8 +116,4 @@ public class FormRegisterController {
             return;
         }
     }
-
-
-
-
 }
