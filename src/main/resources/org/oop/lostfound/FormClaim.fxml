@@ -11,36 +11,36 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormClaimController">
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="960.0" style="-fx-background-color: #3b3a55;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutY="7.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
+            <Button fx:id="lostFoundButton" layoutY="7.0" mnemonicParsing="false" onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparant;" text="Lost &amp; Found" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
             </Button>
-            <Button layoutX="226.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
+            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="23.0" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparant;" text="Lost Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="320.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
+            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparant;" text="Found Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="429.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
+            <Button fx:id="reportButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparant;" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="503.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparant;" text="Claim" textFill="WHITE">
+            <Button fx:id="claimButton" layoutX="503.0" layoutY="23.0" mnemonicParsing="false" onAction="#claimButtonOnAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparant;" text="Claim" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
+            <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -67,14 +67,14 @@
                   <Font name="Arial" size="16.0" />
                </font>
             </Button>
-            <TableView layoutX="90.0" layoutY="64.0" prefHeight="327.0" prefWidth="782.0" style="-fx-background-color: #e9f3f2; -fx-border-color: #3d5a7e; -fx-text-fill: white;">
+            <TableView fx:id="tableClaim" layoutX="90.0" layoutY="64.0" prefHeight="327.0" prefWidth="782.0" style="-fx-background-color: #e9f3f2; -fx-border-color: #3d5a7e; -fx-text-fill: white;">
               <columns>
-                <TableColumn prefWidth="130.0" sortable="false" style="-fx-text-fill: white; -fx-background-color: #318991;" text="Claim Id" />
-                <TableColumn prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Claim Date" />
-                  <TableColumn prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Status" />
-                  <TableColumn prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="User" />
-                  <TableColumn prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Item" />
-                  <TableColumn prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Action" />
+                <TableColumn fx:id="columnClaimId" prefWidth="130.0" sortable="false" style="-fx-text-fill: white; -fx-background-color: #318991;" text="Claim Id" />
+                <TableColumn fx:id="columnClaimDate" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Claim Date" />
+                  <TableColumn fx:id="columnStatus" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Status" />
+                  <TableColumn fx:id="columnUser" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="User" />
+                  <TableColumn fx:id="columnItemName" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Item" />
+                  <TableColumn fx:id="columnAction" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Action" />
               </columns>
             </TableView>
          </children>

@@ -1,28 +1,37 @@
 package org.oop.lostfound.model;
 
-import java.util.Date;
 import org.oop.lostfound.enums.ClaimStatus;
+import java.time.LocalDate;
 
-//Constructor
 public class Claim {
-    private String claimId;
-    private Date claimDate;
-    private ClaimStatus claimStatus;
-    private User user;
-    private FoundItem item;
+    private int claimId;
+    private LocalDate claimDate;
+    private ClaimStatus status;
+    private String user;
+    private String itemName;
 
-    public String getClaimId() { return claimId; }
-    public void setClaimId(String claimId) { this.claimId = claimId; }
+    public Claim(int claimId, LocalDate claimDate, ClaimStatus status, 
+                 String user, String itemName) {
+        this.claimId = claimId;
+        this.claimDate = claimDate;
+        this.status = status;
+        this.user = user;
+        this.itemName = itemName;
+    }
 
-    public Date getClaimDate() { return claimDate; }
-    public void setClaimDate(Date claimDate) { this.claimDate = claimDate; }
+    // Getter methods
+    public int getClaimId() { return claimId; }
+    public void setClaimId(int claimId) { this.claimId = claimId; }
 
-    public ClaimStatus getClaimStatus() { return claimStatus; }
-    public void setClaimStatus(ClaimStatus claimStatus) { this.claimStatus = claimStatus; }
+    public LocalDate getClaimDate() { return claimDate; }
+    public void setClaimDate(LocalDate claimDate) { this.claimDate = claimDate; }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public ClaimStatus getStatus() { return status; }
+    public void setStatus(ClaimStatus status) { this.status = status; }
 
-    public FoundItem getItem() { return item; }
-    public void setItem(FoundItem item) { this.item = item; }
+    public String getuser() { return user; }
+    public void setUser(String user) { this.user = user; }
+
+    public String getItemName() { return itemName; }
+    public void setItemName(String itemName) { this.itemName = itemName; }
 }

@@ -9,6 +9,7 @@ import java.net.URL;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -52,6 +53,8 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
     private Label totalClaimsCountLabel;
     @FXML
     private VBox itemListContainer;
+    @FXML
+    private FlowPane flowPane;
 
 
     @Override
