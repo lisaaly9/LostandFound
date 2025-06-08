@@ -4,8 +4,12 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
+import java.sql.SQLException;
+import org.oop.lostfound.config.Session;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LoginDAO;
+import org.oop.lostfound.model.User;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
@@ -28,6 +32,11 @@ public class FormLoginController {
     @FXML
     private Button loginButton;
     
+    @FXML
+    public void initialize() {
+        Session.setId(0);
+        Session.setUsername(null);
+    }
     @FXML
     private void usernameTextFieldOnAction(ActionEvent event) {
         Stage stage = (Stage) usernameTextField.getScene().getWindow();
@@ -61,29 +70,32 @@ public class FormLoginController {
             return;
         }
         LoginDAO loginDAO = new LoginDAO(Connector.getConnection());
-        boolean success = loginDAO.checkLogin(username, user_password);
+        User user = loginDAO.checkLogin(username, user_password);
+            if (user != null) {
+                Session.setId(user.getId());
+                Session.setUsername(user.getUsername());
 
-        if (success) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("PESAN SUKSES");
-            alert.setHeaderText(null);
-            alert.setContentText("LOGIN BERHASIL");
-            alert.showAndWait();
-            
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
-            Parent parent = fxmlLoader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(parent));
-            stage.show();
-            
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("PESAN ERROR");
-            alert.setHeaderText(null);
-            alert.setContentText("LOGIN GAGAL");
-            alert.showAndWait();
-            return;
-        }
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("PESAN SUKSES");
+                alert.setHeaderText(null);
+                alert.setContentText("LOGIN BERHASIL");
+                alert.showAndWait();
+                
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
+                Parent parent = fxmlLoader.load();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(parent));
+                stage.show();
+                
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("PESAN ERROR");
+                alert.setHeaderText(null);
+                alert.setContentText("LOGIN GAGAL");
+                alert.showAndWait();
+                return;
+            }
+        
     }
 
 

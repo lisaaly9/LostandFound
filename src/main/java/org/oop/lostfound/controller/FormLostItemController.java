@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import org.oop.lostfound.enums.Category;
 import org.oop.lostfound.service.ImageKitService;
+import org.oop.lostfound.config.Session;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LostItemDAO;
 import javafx.event.ActionEvent;
@@ -235,7 +236,7 @@ public class FormLostItemController {
         }
 
         LostItemDAO lostitemDAO = new LostItemDAO(Connector.getConnection());
-        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, location, contact, 1);
+        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, uploadedImageUrl, contact, Session.getId());
 
         submitButton.setText("Submit");
         submitButton.setDisable(false);
