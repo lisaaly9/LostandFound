@@ -4,8 +4,6 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
-import org.oop.lostfound.dao.Connector;
-import org.oop.lostfound.dao.LoginDAO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
@@ -16,18 +14,25 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
+import org.oop.lostfound.config.Session;
+import org.oop.lostfound.dao.Connector;
+import org.oop.lostfound.dao.LoginDAO;
+import org.oop.lostfound.model.User;
 
 
 public class FormLoginController {
-    @FXML
-    private TextField usernameTextField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Hyperlink registerHyperlink;
-    @FXML
-    private Button loginButton;
+    @FXML private TextField usernameTextField;
+    @FXML private PasswordField passwordField;
+    @FXML private Hyperlink registerHyperlink;
+    @FXML private Button loginButton;
     
+    //diinisialisasi, session user direset (logout)
+    @FXML
+    public void initialize() {
+        Session.setId(0);
+        Session.setUsername(null);
+    }
+
     @FXML
     private void usernameTextFieldOnAction(ActionEvent event) {
         Stage stage = (Stage) usernameTextField.getScene().getWindow();
@@ -61,9 +66,11 @@ public class FormLoginController {
             return;
         }
         LoginDAO loginDAO = new LoginDAO(Connector.getConnection());
-        boolean success = loginDAO.checkLogin(username, user_password);
+        User user = loginDAO.checkLogin(username, user_password);
+        if (user != null) {
+            // Optionally, you can retrieve user info here if needed
+            Session.setUsername(user.getUsername());
 
-        if (success) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("PESAN SUKSES");
             alert.setHeaderText(null);
@@ -84,9 +91,6 @@ public class FormLoginController {
             alert.showAndWait();
             return;
         }
+        
     }
-
-
-
-
 }

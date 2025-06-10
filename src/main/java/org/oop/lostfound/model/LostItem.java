@@ -2,13 +2,10 @@ package org.oop.lostfound.model;
 
 import java.time.LocalDate;
 import org.oop.lostfound.enums.Category;
-import java.sql.Date;
-import java.sql.Timestamp;
 
 public class LostItem extends Item implements IReportable {
     
-    public LostItem(int id, String name, String description, String location,
-                    Category category, String contact, String imageUrl, LocalDate date) {
+    public LostItem(int id, String name, String description, String location, Category category, String contact, String imageUrl, LocalDate date) {
         super(id, name, description, location, category, contact, imageUrl, date);
     }
 
@@ -23,8 +20,7 @@ public class LostItem extends Item implements IReportable {
         return "[LOST] " + getName() + " - " + getDescription();
     }
 
-    public void setDetails(String name, String description, String location,
-                           Category category, String contact, String imageUrl, LocalDate date) {
+    public void setDetails(String name, String description, String location, Category category, String contact, String imageUrl, LocalDate date) {
         setName(name);
         setDescription(description);
         setLocation(location);

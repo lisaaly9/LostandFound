@@ -1,23 +1,25 @@
 package org.oop.lostfound.model;
 
-import java.util.ArrayList;
-
+//Encapsulation
 public class User {
-    private int userId;
-    private String nama;
-    private ArrayList<Claim> daftarClaim;
+   private int id;
+    private String username;
 
-    public User(int userId, String nama) {
-        this.userId = userId;
-        this.nama = nama;
-        this.daftarClaim = new ArrayList<>();
+    //Konstruktor
+    public User(int id, String username) {
+        this.id = id;
+        this.username = username;
     }
+    // getter
+    public int getId() { return id; }
+    public String getUsername() { return username; }
 
-    public void tambahClaim(Claim claim) {
-        daftarClaim.add(claim);
-    }
 
-    public ArrayList<Claim> getDaftarClaim() {
-        return daftarClaim;
-    }
+    //digunakan nanti
+    // public void tambahClaim(Claim claim) {
+    //     daftarClaim.add(claim);
+    // }
+    // public ArrayList<Claim> getDaftarClaim() {
+    //     return daftarClaim;
+    // }
 }

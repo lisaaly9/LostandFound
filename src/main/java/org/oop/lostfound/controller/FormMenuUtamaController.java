@@ -103,7 +103,6 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
                 // Event handler untuk klik gambar
                 imageView.setOnMouseClicked(e -> {
                     org.oop.lostfound.controller.FormDetailLostItemController.showDetail(lostItem);
-                    System.out.println("Clicked on lost item: " + lostItem.getNamaBarang());
                 });
                 
                 box.getChildren().addAll(imageView, nameLabel);

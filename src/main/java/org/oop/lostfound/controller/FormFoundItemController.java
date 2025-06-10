@@ -3,10 +3,6 @@ package org.oop.lostfound.controller;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import org.oop.lostfound.enums.Category;
-import org.oop.lostfound.service.ImageKitService;
-import org.oop.lostfound.dao.Connector;
-import org.oop.lostfound.dao.FoundItemDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,44 +20,35 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.oop.lostfound.enums.Category;
+import org.oop.lostfound.service.ImageKitService;
+import org.oop.lostfound.dao.Connector;
+import org.oop.lostfound.dao.FoundItemDAO;
 
 public class FormFoundItemController {
-    @FXML
-    private Button lostFoundButton;
-    @FXML
-    private Button lostItemButton;
-    @FXML
-    private Button foundItemButton;
-    @FXML
-    private Button reportButton;
-    @FXML
-    private Button claimButton;
-    @FXML
-    private Button logOutButton; 
-    @FXML
-    private TextField itemNameTextField;
-    @FXML
-    private TextField descriptionTextField;
-    @FXML
-    private TextField locationTextField;
-    @FXML
-    private Button selectImageButton;
-    @FXML
-    private Label selectedImageLabel;
-    @FXML
-    private DatePicker dateFoundDatePicker;
-    @FXML
-    private ComboBox<Category> categoryComboBox;
-    @FXML
-    private TextField contactTextField;
-    @FXML
-    private Button submitButton;
+    // Navigasi antar halaman
+    @FXML private Button lostFoundButton;
+    @FXML private Button lostItemButton;
+    @FXML private Button foundItemButton;
+    @FXML private Button reportButton;
+    @FXML private Button claimButton;
+    @FXML private Button logOutButton; 
 
-    @FXML
-    private ImageView imagePreview;
-    
-    private File selectedImageFile;
-    private String uploadedImageUrl;
+    //Input data barang ditemukan
+    @FXML private TextField itemNameTextField;
+    @FXML private TextField descriptionTextField;
+    @FXML private TextField locationTextField;
+    @FXML private Button selectImageButton;
+    @FXML private Label selectedImageLabel;
+    @FXML private DatePicker dateFoundDatePicker;
+    @FXML private ComboBox<Category> categoryComboBox;
+    @FXML private TextField contactTextField;
+    @FXML private Button submitButton;
+
+    //gambar dan preview
+    @FXML private ImageView imagePreview;
+    @FXML private File selectedImageFile;
+    @FXML private String uploadedImageUrl;
 
     @FXML
     private void initialize() {
@@ -147,8 +134,7 @@ public class FormFoundItemController {
         
         // Set extension filter
         FileChooser.ExtensionFilter extFilter = 
-            new FileChooser.ExtensionFilter("Image files (*.png, *.jpg, *.jpeg)", 
-                                            "*.PNG", "*.png", "*.JPG", "*.jpg", "*.JPEG", "*.jpeg");
+            new FileChooser.ExtensionFilter("Image files (*.png, *.jpg, *.jpeg)", "*.PNG", "*.png", "*.JPG", "*.jpg", "*.JPEG", "*.jpeg");
         fileChooser.getExtensionFilters().add(extFilter);
         
         Stage stage = (Stage) selectImageButton.getScene().getWindow();
@@ -213,11 +199,12 @@ public class FormFoundItemController {
             alert.showAndWait();
             return;
         }
-            // Upload image if selected
+        
+        //upload gambar
         uploadedImageUrl = null;
         if (selectedImageFile != null) {
             try {
-                // Show loading indicator
+                // tampilan loading 
                 submitButton.setText("Uploading...");
                 submitButton.setDisable(true);
                 
@@ -245,7 +232,7 @@ public class FormFoundItemController {
             showAlert(AlertType.INFORMATION, "BERHASIL", 
                     "DATA BARANG HILANG BERHASIL DISIMPAN!");
             
-            // Navigate back to main menu
+            // Kembali ke halaman menu utama
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
             Parent parent = fxmlLoader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

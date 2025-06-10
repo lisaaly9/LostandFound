@@ -6,7 +6,7 @@ import org.oop.lostfound.enums.Category;
 public class FoundItem extends Item implements IReportable {
 
     public FoundItem(int id, String name, String description, String location,
-                    Category category, String contact, String imageUrl, LocalDate date) {
+                     Category category, String contact, String imageUrl, LocalDate date) {
         super(id, name, description, location, category, contact, imageUrl, date);
     }
 
@@ -20,8 +20,7 @@ public class FoundItem extends Item implements IReportable {
         return "[FOUND] " + getName() + " - " + getDescription();
     }
 
-    public void setDetails(String name, String description, String location,
-                        Category category, String contact, String imageUrl, LocalDate date) {
+    public void setDetails(String name, String description, String location, Category category, String contact, String imageUrl, LocalDate date) {
         setName(name);
         setDescription(description);
         setLocation(location);

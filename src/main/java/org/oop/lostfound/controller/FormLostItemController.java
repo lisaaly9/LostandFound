@@ -3,10 +3,6 @@ package org.oop.lostfound.controller;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import org.oop.lostfound.enums.Category;
-import org.oop.lostfound.service.ImageKitService;
-import org.oop.lostfound.dao.Connector;
-import org.oop.lostfound.dao.LostItemDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,48 +20,40 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.oop.lostfound.enums.Category;
+import org.oop.lostfound.service.ImageKitService;
+import org.oop.lostfound.config.Session;
+import org.oop.lostfound.dao.Connector;
+import org.oop.lostfound.dao.LostItemDAO;
 
 public class FormLostItemController {
-    @FXML
-    private Button lostFoundButton;
-    @FXML
-    private Button lostItemButton;
-    @FXML
-    private Button foundItemButton;
-    @FXML
-    private Button reportButton;
-    @FXML
-    private Button claimButton;
-    @FXML
-    private Button logOutButton; 
-    @FXML
-    private TextField itemNameTextField;
-    @FXML
-    private TextField descriptionTextField;
-    @FXML
-    private TextField locationTextField;
-    @FXML
-    private DatePicker dateLostDatePicker;
-    @FXML
-    private ComboBox<Category> categoryComboBox;
-    @FXML
-    private Button selectImageButton;
-    @FXML
-    private Label selectedImageLabel;
-    @FXML
-    private TextField contactTextField;
-    @FXML
-    private Button submitButton;
+    // Tombol navigasi antar halaman
+    @FXML private Button lostFoundButton;
+    @FXML private Button lostItemButton;
+    @FXML private Button foundItemButton;
+    @FXML private Button reportButton;
+    @FXML private Button claimButton;
+    @FXML private Button logOutButton; 
 
-    @FXML
-    private ImageView imagePreview;
-    private File selectedImageFile;
-    private String uploadedImageUrl;
+    // Field input form barang hilang
+    @FXML private TextField itemNameTextField;
+    @FXML private TextField descriptionTextField;
+    @FXML private TextField locationTextField;
+    @FXML private DatePicker dateLostDatePicker;
+    @FXML private ComboBox<Category> categoryComboBox;
+    @FXML private Button selectImageButton;
+    @FXML private Label selectedImageLabel;
+    @FXML private TextField contactTextField;
+    @FXML private Button submitButton;
+
+    //preview gambar
+    @FXML private ImageView imagePreview;
+    @FXML private File selectedImageFile;
+    @FXML private String uploadedImageUrl;
 
     @FXML
     private void initialize() {
         categoryComboBox.getItems().setAll(Category.values());
-        // typeComboBox.getItems().setAll(ItemType.values());
     }
 
     @FXML
@@ -167,10 +155,9 @@ public class FormLostItemController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Pilih Foto Barang");
         
-        // Set extension filter
+        // Set extension filter (file yang boleh dipilih)
         FileChooser.ExtensionFilter extFilter = 
-            new FileChooser.ExtensionFilter("Image files (*.png, *.jpg, *.jpeg)", 
-                                            "*.PNG", "*.png", "*.JPG", "*.jpg", "*.JPEG", "*.jpeg");
+            new FileChooser.ExtensionFilter("Image files (*.png, *.jpg, *.jpeg)", "*.PNG", "*.png", "*.JPG", "*.jpg", "*.JPEG", "*.jpeg");
         fileChooser.getExtensionFilters().add(extFilter);
         
         Stage stage = (Stage) selectImageButton.getScene().getWindow();
@@ -235,7 +222,7 @@ public class FormLostItemController {
         }
 
         LostItemDAO lostitemDAO = new LostItemDAO(Connector.getConnection());
-        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, uploadedImageUrl, contact, 1);
+        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, location, contact, 1);
 
         submitButton.setText("Submit");
         submitButton.setDisable(false);
@@ -245,7 +232,7 @@ public class FormLostItemController {
             showAlert(AlertType.INFORMATION, "BERHASIL", 
                     "DATA BARANG HILANG BERHASIL DISIMPAN!");
             
-            // Navigate back to main menu
+            // Kembali ke menu utama
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
             Parent parent = fxmlLoader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -254,7 +241,5 @@ public class FormLostItemController {
         } else { 
             showAlert(AlertType.ERROR, "GAGAL", "GAGAL MENYIMPAN DATA BARANG HILANG");
         }
-
-        
     }
 }

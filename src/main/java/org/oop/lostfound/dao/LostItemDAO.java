@@ -20,6 +20,7 @@ public class LostItemDAO {
         this.connection = connection;
     }
 
+    // Menyimpan data barang hilang ke tabel lost_item
     public boolean insertLostItem(String itemName, String description, String location, LocalDate dateLost, Category category, String image_url, String contact, int idAccount) {
         String sql = "INSERT INTO lost_item (item_name, description_item, location_item, date_lost, category, image_url, contact, id_account) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -40,6 +41,7 @@ public class LostItemDAO {
         }
     }
 
+    // Menghitung total lost item
     public int getJumlahLostItems() {
         String sql = "SELECT COUNT(*) FROM lost_item";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -53,17 +55,17 @@ public class LostItemDAO {
         return 0;
     }
 
+    //Mengambil semua lost item dari database
     public List<LostItem> getAllLostItems() {
         List<LostItem> lostItems = new ArrayList<>();
-        String sql = "SELECT * FROM lost_item"; // Adjust table name and columns as needed
+        String sql = "SELECT * FROM lost_item"; 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 LostItem item = new LostItem(0, sql, sql, sql, null, sql, sql, null);
-                item.setId(rs.getInt("id_item")); // Adjust column names as needed
-                item.setName(rs.getString("item_name")); // Use the correct setter as defined in LostItem
+                item.setId(rs.getInt("id_item")); 
+                item.setName(rs.getString("item_name")); 
                 item.setImageUrl(rs.getString("image_url"));
-                // Set other fields if needed
                 lostItems.add(item);
             }
         } catch (Exception e) {
