@@ -15,13 +15,14 @@ import org.oop.lostfound.model.FoundItem;
 public class FoundItemDAO {
     private Connection connection;
 
-    public FoundItemDAO(Connection connection) {
-        this.connection = connection;
+    public FoundItemDAO() {
+        this.connection = Connector.getConnection();
     }
 
     public boolean insertFoundItem(String itemName, String description, String location, String image_url, LocalDate dateFound, Category category, String contact, int idAccount) {
         String sql = "INSERT INTO found_item (item_name, description_item, location_item, image_url, date_found, category, contact, id_account) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (Connection conn = Connector.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, itemName);
             stmt.setString(2, description);
             stmt.setString(3, location);
@@ -40,7 +41,8 @@ public class FoundItemDAO {
 
     public int getJumlahFoundItems() {
     String sql = "SELECT COUNT(*) FROM found_item";
-    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+    try (Connection conn = Connector.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
         var rs = stmt.executeQuery();
         if (rs.next()) {
             return rs.getInt(1);
@@ -52,20 +54,37 @@ public class FoundItemDAO {
     }
 
     public List<FoundItem> getAllFoundItems() throws Exception {
-    List<FoundItem> foundItems = new ArrayList<>();
-    String sql = "SELECT * FROM found_item"; // Adjust table name/columns as needed
-    try (PreparedStatement stmt = connection.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery()) {
-        while (rs.next()) {
-            FoundItem item = new FoundItem(0, sql, sql, sql, null, sql, sql, null);
-            // Set properties from ResultSet, e.g.:
-            item.setId(rs.getInt("id_item"));
-            item.setName(rs.getString("item_name"));
-            item.setImageUrl(rs.getString("image_url"));
-            // Add other fields as needed
-            foundItems.add(item);
+        List<FoundItem> foundItems = new ArrayList<>();
+        String sql = "SELECT * FROM found_item";
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                FoundItem item = new FoundItem(
+                    rs.getInt("id_item"),
+                    rs.getString("item_name"),
+                    rs.getString("description_item"),
+                    rs.getString("location_item"),
+                    org.oop.lostfound.enums.Category.valueOf(rs.getString("category")),
+                    rs.getString("contact"),
+                    rs.getString("image_url"),
+                    rs.getDate("date_found") != null ? rs.getDate("date_found").toLocalDate() : null
+                );
+                foundItems.add(item);
             }
-        } 
+        }
         return foundItems;
     }
+
+    public void deleteFoundItemById(int id) {
+
+        String sql = "DELETE FROM found_item WHERE id_item = ?";
+        try (Connection conn =  Connector.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

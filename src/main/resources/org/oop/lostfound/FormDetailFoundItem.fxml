@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="org.oop.lostfound.controller.FormDetailFoundItemController" spacing="10" alignment="CENTER" style="-fx-padding: 24;">
+    <ImageView fx:id="itemImageView" fitWidth="200" preserveRatio="true" />
+    <Label fx:id="itemNameLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+    <Label text="Penemu:" style="-fx-font-weight: bold;" />
+    <Label fx:id="finderNameLabel" />
+    <Label text="Tanggal Ditemukan:" style="-fx-font-weight: bold;" />
+    <Label fx:id="dateLabel" />
+    <Label text="Deskripsi:" style="-fx-font-weight: bold;" />
+    <Label fx:id="descriptionLabel" wrapText="true" maxWidth="300" />
+    <Button fx:id="claimButton" text="Claim Barang" />
+</VBox>

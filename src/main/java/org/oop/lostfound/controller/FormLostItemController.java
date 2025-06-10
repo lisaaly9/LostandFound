@@ -235,7 +235,7 @@ public class FormLostItemController {
         }
 
         LostItemDAO lostitemDAO = new LostItemDAO(Connector.getConnection());
-        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, location, contact, 1);
+        boolean success = lostitemDAO.insertLostItem(itemName, description, location, dateLost, category, uploadedImageUrl, contact, 1);
 
         submitButton.setText("Submit");
         submitButton.setDisable(false);

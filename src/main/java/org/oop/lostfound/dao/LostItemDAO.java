@@ -30,7 +30,7 @@ public class LostItemDAO {
             stmt.setString(5, category.name());
             stmt.setString(6, image_url);
             stmt.setString(7, contact);
-            stmt.setInt(8, idAccount); // Assuming id_account is 1 for the logged-in user, adjust as necessary
+            stmt.setInt(8, idAccount);
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {

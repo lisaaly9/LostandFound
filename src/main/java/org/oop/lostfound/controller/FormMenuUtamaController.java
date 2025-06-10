@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.FlowPane;
 
 import java.sql.Connection;
 import java.util.ResourceBundle;
@@ -51,63 +52,192 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
     @FXML
     private Label totalClaimsCountLabel;
     @FXML
-    private VBox itemListContainer;
-
+    private FlowPane itemListFlowPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        if (itemListFlowPane != null) {
+            itemListFlowPane.setHgap(10); 
+            itemListFlowPane.setVgap(10); 
+            itemListFlowPane.setPrefWrapLength(800); 
+        }
+        
         updateDashboardData();
         loadItemList();
     }
 
-    /**
-     * Membuat VBox sederhana untuk menampilkan nama barang dan gambar (jika ada URL gambar).
-     */
-    private VBox createItemVBox(String namaBarang, String imageUrl) {
+    private VBox createLostItemVBox(org.oop.lostfound.model.LostItem lostItem) {
         VBox box = new VBox();
-        Label nameLabel = new Label(namaBarang);
-        box.getChildren().add(nameLabel);
-        // Jika ingin menampilkan gambar, tambahkan kode berikut:
-        if (imageUrl != null && !imageUrl.isEmpty()) {
+        box.setSpacing(5);
+        box.setAlignment(Pos.CENTER);
+        box.setPrefWidth(140); // Set fixed width
+        box.setMaxWidth(140);
+        box.setMinWidth(140);
+        
+        // Style untuk box
+        box.setStyle("-fx-padding: 10; -fx-border-color: #ddd; -fx-border-radius: 8; -fx-background-color: #f9f9f9; -fx-background-radius: 8;");
+        
+        // Label nama barang
+        Label nameLabel = new Label(lostItem.getNamaBarang());
+        nameLabel.setMaxWidth(120);
+        nameLabel.setWrapText(true);
+        nameLabel.setStyle("-fx-font-size: 12px; -fx-text-alignment: center;");
+        
+
+        if (lostItem.getImageUrl() != null && !lostItem.getImageUrl().isEmpty()) {
             try {
-                javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(new javafx.scene.image.Image(imageUrl));
-                imageView.setFitWidth(100);
+                ImageView imageView = new ImageView();
+                
+
+                Image image = new Image(lostItem.getImageUrl(), true);
+                imageView.setImage(image);
+                
+                // Set properties untuk ImageView
+                imageView.setFitWidth(120);
+                imageView.setFitHeight(100);
                 imageView.setPreserveRatio(true);
-                box.getChildren().add(imageView);
+                imageView.setSmooth(true);
+                imageView.setStyle("-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 4;");
+                
+                // Event handler untuk klik gambar
+                imageView.setOnMouseClicked(e -> {
+                    org.oop.lostfound.controller.FormDetailLostItemController.showDetail(lostItem);
+                    System.out.println("Clicked on lost item: " + lostItem.getNamaBarang());
+                });
+                
+                box.getChildren().addAll(imageView, nameLabel);
+                
             } catch (Exception e) {
-                // Jika gagal load gambar, abaikan saja
+                System.err.println("Error loading image for lost item: " + e.getMessage());
+                // Jika gagal load gambar, tampilkan placeholder
+                Label placeholderLabel = new Label("No Image");
+                placeholderLabel.setPrefSize(120, 100);
+                placeholderLabel.setStyle("-fx-background-color: #eee; -fx-border-color: #ccc; -fx-alignment: center;");
+                box.getChildren().addAll(placeholderLabel, nameLabel);
             }
+        } else {
+            // Jika tidak ada URL gambar, tampilkan placeholder
+            Label placeholderLabel = new Label("No Image");
+            placeholderLabel.setPrefSize(120, 100);
+            placeholderLabel.setStyle("-fx-background-color: #eee; -fx-border-color: #ccc; -fx-alignment: center;");
+            box.getChildren().addAll(placeholderLabel, nameLabel);
         }
+        
         return box;
     }
-    
+
+    /**
+     * Membuat VBox untuk FoundItem dengan gambar yang dapat diklik
+     */
+    private VBox createFoundItemVBox(org.oop.lostfound.model.FoundItem foundItem) {
+        VBox box = new VBox();
+        box.setSpacing(5);
+        box.setAlignment(Pos.CENTER);
+        box.setPrefWidth(140); // Set fixed width
+        box.setMaxWidth(140);
+        box.setMinWidth(140);
+        
+        // Style untuk box
+        box.setStyle("-fx-padding: 10; -fx-border-color: #ddd; -fx-border-radius: 8; -fx-background-color: #f0f8ff; -fx-background-radius: 8;");
+        
+        // Label nama barang
+        Label nameLabel = new Label(foundItem.getNamaBarang());
+        nameLabel.setMaxWidth(120);
+        nameLabel.setWrapText(true);
+        nameLabel.setStyle("-fx-font-size: 12px; -fx-text-alignment: center;");
+        
+        // Tambahkan gambar jika ada
+        if (foundItem.getImageUrl() != null && !foundItem.getImageUrl().isEmpty()) {
+            try {
+                ImageView imageView = new ImageView();
+                
+                // Coba load gambar
+                Image image = new Image(foundItem.getImageUrl(), true); // background loading
+                imageView.setImage(image);
+                
+                // Set properties untuk ImageView
+                imageView.setFitWidth(120);
+                imageView.setFitHeight(100);
+                imageView.setPreserveRatio(true);
+                imageView.setSmooth(true);
+                imageView.setStyle("-fx-cursor: hand; -fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 4;");
+                
+                // Event handler untuk klik gambar
+                imageView.setOnMouseClicked(e -> {
+                    try {
+                        org.oop.lostfound.controller.FormDetailFoundItemController.showDetail(foundItem);
+                    } catch (Exception ex) {
+                        System.err.println("Error opening detail form: " + ex.getMessage());
+                    }
+                });
+                
+                box.getChildren().addAll(imageView, nameLabel);
+                
+            } catch (Exception e) {
+                System.err.println("Error loading image for found item: " + e.getMessage());
+                // Jika gagal load gambar, tampilkan placeholder
+                Label placeholderLabel = new Label("No Image");
+                placeholderLabel.setPrefSize(120, 100);
+                placeholderLabel.setStyle("-fx-background-color: #eee; -fx-border-color: #ccc; -fx-alignment: center; -fx-cursor: hand;");
+                placeholderLabel.setOnMouseClicked(event -> {
+                    try {
+                        org.oop.lostfound.controller.FormDetailFoundItemController.showDetail(foundItem);
+                    } catch (Exception ex) {
+                        System.err.println("Error opening detail form: " + ex.getMessage());
+                    }
+                });
+                box.getChildren().addAll(placeholderLabel, nameLabel);
+            }
+        } else {
+            // Jika tidak ada URL gambar, tampilkan placeholder
+            Label placeholderLabel = new Label("No Image");
+            placeholderLabel.setPrefSize(120, 100);
+            placeholderLabel.setStyle("-fx-background-color: #eee; -fx-border-color: #ccc; -fx-alignment: center; -fx-cursor: hand;");
+            placeholderLabel.setOnMouseClicked(e -> {
+                try {
+                    org.oop.lostfound.controller.FormDetailFoundItemController.showDetail(foundItem);
+                } catch (Exception ex) {
+                    System.err.println("Error opening detail form: " + ex.getMessage());
+                }
+            });
+            box.getChildren().addAll(placeholderLabel, nameLabel);
+        }
+        
+        return box;
+    }
+
+
     private void loadItemList() {
         try {
             Connection connection = Connector.getConnection();
             LostItemDAO lostItemDAO = new LostItemDAO(connection);
-            FoundItemDAO foundItemDAO = new FoundItemDAO(connection);
+            FoundItemDAO foundItemDAO = new FoundItemDAO();
 
-            itemListContainer.getChildren().clear(); // Clear existing
+            // Clear existing items
+            itemListFlowPane.getChildren().clear();
 
             // Ambil semua item dari DB
-            java.util.List<?> lostItems = lostItemDAO.getAllLostItems();  // Pastikan method ini mengembalikan List
-            java.util.List<?> foundItems = foundItemDAO.getAllFoundItems(); // Pastikan method ini mengembalikan List
+            java.util.List<?> lostItems = lostItemDAO.getAllLostItems();
+            java.util.List<?> foundItems = foundItemDAO.getAllFoundItems();
 
-            // Gabungkan dan tampilkan semua item
+            // Tampilkan LostItem
             for (var item : lostItems) {
-                // Cast to the correct type, e.g., LostItem
                 org.oop.lostfound.model.LostItem lostItem = (org.oop.lostfound.model.LostItem) item;
-                itemListContainer.getChildren().add(createItemVBox(lostItem.getNamaBarang(), lostItem.getImageUrl()));
+                itemListFlowPane.getChildren().add(createLostItemVBox(lostItem));
             }
             
+            // Tampilkan FoundItem
             for (var item : foundItems) {
-                // Cast to the correct type, e.g., FoundItem
                 org.oop.lostfound.model.FoundItem foundItem = (org.oop.lostfound.model.FoundItem) item;
-                itemListContainer.getChildren().add(createItemVBox(foundItem.getNamaBarang(), foundItem.getImageUrl()));
+                itemListFlowPane.getChildren().add(createFoundItemVBox(foundItem));
             }
-
+            
+            System.out.println("Loaded " + lostItems.size() + " lost items and " + foundItems.size() + " found items");
+            
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Error loading item list: " + e.getMessage());
         }
     }
 
@@ -116,7 +246,7 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
         try {
             Connection connection = Connector.getConnection();
             LostItemDAO lostItemDAO = new LostItemDAO(connection);
-            FoundItemDAO foundItemDAO = new FoundItemDAO(connection);
+            FoundItemDAO foundItemDAO = new FoundItemDAO();
             
             // Ambil data dari database
             int jumlahLostItems = lostItemDAO.getJumlahLostItems();
@@ -134,7 +264,7 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable {
             e.printStackTrace();
             // Set nilai default jika terjadi error
             totalItemsCountLabel.setText("0");
-            lostItemsCountLabel.setText("Error");
+            lostItemsCountLabel.setText("0");
             foundItemsCountLabel.setText("0");
             totalClaimsCountLabel.setText("0");
         }

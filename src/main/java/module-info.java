@@ -20,6 +20,8 @@ module org.oop.lostfound {
     opens org.oop.lostfound to javafx.fxml;
     exports org.oop.lostfound;
     exports org.oop.lostfound.controller;
+    exports org.oop.lostfound.model;
+    exports org.oop.lostfound.enums;
     opens org.oop.lostfound.controller to javafx.fxml;
     opens org.oop.lostfound.model to javafx.base, javafx.fxml;
 }

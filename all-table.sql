@@ -37,3 +37,14 @@ CREATE TABLE lost_item (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+CREATE TABLE claim_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(100),
+    finder_name VARCHAR(100),
+    found_date DATE,
+    description TEXT,
+    image_url VARCHAR(255),
+    claimant_name VARCHAR(100),
+    claimant_phone VARCHAR(30)
+);
