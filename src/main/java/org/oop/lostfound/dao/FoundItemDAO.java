@@ -11,7 +11,6 @@ import java.util.List;
 import org.oop.lostfound.enums.Category;
 import org.oop.lostfound.model.FoundItem;
 
-
 public class FoundItemDAO {
     private Connection connection;
 
@@ -42,41 +41,64 @@ public class FoundItemDAO {
 
     // Mengambil jumlah total barang ditemukan dari found_item
     public int getJumlahFoundItems() {
-    String sql = "SELECT COUNT(*) FROM found_item";
-    try (Connection conn = Connector.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-        var rs = stmt.executeQuery();
-        if (rs.next()) {
-            return rs.getInt(1);
+        String sql = "SELECT COUNT(*) FROM found_item";
+        try (Connection conn = Connector.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return 0;
+        return 0;
     }
 
     // Mengambil semua data barang ditemukan dalam bentuk list
     public List<FoundItem> getAllFoundItems() throws Exception {
     List<FoundItem> foundItems = new ArrayList<>();
-    String sql = "SELECT * FROM found_item"; // Adjust table name/columns as needed
+    String sql = "SELECT * FROM found_item";
+    
     try (PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery()) {
+        
         while (rs.next()) {
-            FoundItem item = new FoundItem(0, sql, sql, sql, null, sql, sql, null);
-            // Set properties from ResultSet, e.g.:
+
+            FoundItem item = new FoundItem();
+            
+            // Set data menggunakan setter methods
             item.setId(rs.getInt("id_item"));
             item.setName(rs.getString("item_name"));
+            item.setDescription(rs.getString("description_item"));
+            item.setLocation(rs.getString("location_item"));
             item.setImageUrl(rs.getString("image_url"));
-            // Add other fields as needed
-            foundItems.add(item);
+            item.setContact(rs.getString("contact"));
+            
+            // Set tanggal dengan null-check
+            if (rs.getDate("date_found") != null) {
+                item.setDate(rs.getDate("date_found").toLocalDate());
             }
+            
+            // Set kategori dengan null-check
+            String categoryStr = rs.getString("category");
+            if (categoryStr != null && !categoryStr.isEmpty()) {
+                try {
+                    item.setCategory(Category.valueOf(categoryStr));
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Invalid category: " + categoryStr);
+                    // Set default category atau handle error sesuai kebutuhan
+                }
+            }
+            
+            foundItems.add(item);
         }
-        return foundItems;
     }
+    return foundItems;
+}
 
     public void deleteFoundItemById(int id) {
         String sql = "DELETE FROM found_item WHERE id_item = ?";
-        try (Connection conn =  Connector.getConnection();
+        try (Connection conn = Connector.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -84,5 +106,4 @@ public class FoundItemDAO {
             e.printStackTrace();
         }
     }
-
 }

@@ -1,6 +1,6 @@
 package org.oop.lostfound.enums;
 
-public enum Category { ELEKTRONIK, DOKUMEN, ALAT_TULIS, LAINNYA;
+public enum Category { ELEKTRONIK, DOKUMEN, ALAT_TULIS, LAINNYA, OTHER;
 
      public boolean equalsIgnoreCase(Category other) {
         return other != null && this.name().equalsIgnoreCase(other.name());

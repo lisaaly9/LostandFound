@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import org.oop.lostfound.enums.Category;
+import org.oop.lostfound.model.FoundItem;
 import org.oop.lostfound.model.LostItem;
 
 
@@ -56,21 +57,30 @@ public class LostItemDAO {
     }
 
     //Mengambil semua lost item dari database
-    public List<LostItem> getAllLostItems() {
-        List<LostItem> lostItems = new ArrayList<>();
-        String sql = "SELECT * FROM lost_item"; 
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                LostItem item = new LostItem(0, sql, sql, sql, null, sql, sql, null);
-                item.setId(rs.getInt("id_item")); 
-                item.setName(rs.getString("item_name")); 
-                item.setImageUrl(rs.getString("image_url"));
-                lostItems.add(item);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+public List<LostItem> getAllLostItems() {
+    List<LostItem> lostItems = new ArrayList<>();
+    String sql = "SELECT * FROM lost_item";
+    
+    try (PreparedStatement stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery()) {
+        
+        while (rs.next()) {
+            // Buat objek LostItem dengan data dari ResultSet, bukan string SQL
+            LostItem item = new LostItem(
+                rs.getInt("id_item"),
+                rs.getString("item_name"),
+                rs.getString("description_item"),
+                rs.getString("location_item"),
+                Category.valueOf(rs.getString("category")),
+                rs.getString("contact"),
+                rs.getString("image_url"),
+                rs.getDate("date_lost") != null ? rs.getDate("date_lost").toLocalDate() : null
+            );
+            lostItems.add(item);
         }
-        return lostItems;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return lostItems;
+}
 }

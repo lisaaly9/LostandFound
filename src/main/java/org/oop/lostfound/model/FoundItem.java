@@ -10,6 +10,10 @@ public class FoundItem extends Item implements IReportable {
         super(id, name, description, location, category, contact, imageUrl, date);
     }
 
+    public FoundItem() {
+        super(0, "", "", "", Category.OTHER, "", "", LocalDate.now());
+    }
+
     @Override
     public String generateReport() {
         return "Laporan Penemuan: " + getName() + " ditemukan di lokasi " + getLocation();
