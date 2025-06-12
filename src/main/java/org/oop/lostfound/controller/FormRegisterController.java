@@ -17,16 +17,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 
-
 public class FormRegisterController {
-    @FXML private TextField usernameTextField;
-    @FXML private TextField phoneTextField;
-    @FXML private TextField emailTextField;
-    @FXML private PasswordField passwordField;
-    @FXML private PasswordField retypePasswordField;
-    @FXML private Hyperlink loginHyperlink;
-    @FXML private Button registerButton;
-    
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private TextField phoneTextField;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private PasswordField retypePasswordField;
+    @FXML
+    private Hyperlink loginHyperlink;
+    @FXML
+    private Button registerButton;
+
     @FXML
     private void usernameTextFieldOnAction(ActionEvent event) {
         Stage stage = (Stage) usernameTextField.getScene().getWindow();
@@ -65,6 +71,7 @@ public class FormRegisterController {
         stage.setScene(new Scene(parent));
         stage.show();
     }
+
     @FXML
     private void registerButtonOnAction(ActionEvent event) throws IOException {
         String username = usernameTextField.getText();
@@ -73,11 +80,21 @@ public class FormRegisterController {
         String user_password = passwordField.getText();
         String retype_password = retypePasswordField.getText();
 
-        if (username.isEmpty() || phone_number.isEmpty() || email.isEmpty() || user_password.isEmpty() || retype_password.isEmpty()) {
+        if (username.isEmpty() || phone_number.isEmpty() || email.isEmpty() || user_password.isEmpty()
+                || retype_password.isEmpty()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("PESAN PERIodsjfsNGATAN");
+            alert.setHeaderText(null);
+            alert.setContentText("TIDAK BOLEH ADA DATA YANG KOSONG!");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!phone_number.matches("\\d+")) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("PESAN PERINGATAN");
             alert.setHeaderText(null);
-            alert.setContentText("TIDAK BOLEH ADA DATA YANG KOSONG!");
+            alert.setContentText("NOMOR TELEPON HANYA BOLEH BERISI ANGKA!");
             alert.showAndWait();
             return;
         }
@@ -100,13 +117,13 @@ public class FormRegisterController {
             alert.setHeaderText(null);
             alert.setContentText("REGISTRASI SUKSES");
             alert.showAndWait();
-            
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormLogin.fxml"));
             Parent parent = fxmlLoader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(parent));
             stage.show();
-            
+
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("PESAN ERROR");
