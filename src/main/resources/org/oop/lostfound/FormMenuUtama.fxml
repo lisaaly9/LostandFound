@@ -1,57 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.oop.lostfound.controller.FormMenuUtamaController">
+<BorderPane prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormMenuUtamaController">
 
    <!-- Bagian Atas -->
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="960.0" style="-fx-background-color: #3b3a55;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false"
-                    onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0"
-                    style="-fx-background-color: transparent;" text="Lost &amp; Found" textFill="WHITE">
+            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparent;" text="Lost &amp; Found" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
             </Button>
-            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="23.0" mnemonicParsing="false"
-                    onAction="#lostItemButtonOnAction" style="-fx-background-color: transparent;"
-                    text="Lost Item" textFill="WHITE">
+            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="23.0" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparent;" text="Lost Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="23.0" mnemonicParsing="false"
-                    onAction="#foundItemButtonOnAction" style="-fx-background-color: transparent;"
-                    text="Found Item" textFill="WHITE">
+            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparent;" text="Found Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="reportButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false"
-                    onAction="#reportButtonOnAction" style="-fx-background-color: transparent;"
-                    text="Report" textFill="WHITE">
+            <Button fx:id="reportButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparent;" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="claimButton" layoutX="503.0" layoutY="23.0" mnemonicParsing="false"
-                    onAction="#claimButtonOnAction" prefHeight="30.0" prefWidth="71.0"
-                    style="-fx-background-color: transparent;" text="Claim" textFill="WHITE">
+            <Button fx:id="claimButton" layoutX="503.0" layoutY="23.0" mnemonicParsing="false" onAction="#claimButtonOnAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparent;" text="Claim" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false"
-                    onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0"
-                    style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
+            <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -70,14 +61,14 @@
       <AnchorPane prefHeight="485.0" prefWidth="960.0" style="-fx-background-color: #e9f3f2;" BorderPane.alignment="CENTER">
          <children>
             <!-- Label Judul -->
-            <Label layoutX="38.0" layoutY="12.0" text="Lost &amp; Found">
+            <Label layoutX="38.0" layoutY="12.0" text="Dashboard">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
 
             <!-- Card: Total Items -->
-            <Rectangle fill="#3b3a55" height="91.0" layoutX="45.0" layoutY="46.0" width="182.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" />
+            <Rectangle fill="#3b3a55" height="91.0" layoutX="45.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
             <Label layoutX="118.0" layoutY="58.0" text="Total Items" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="13.0" />
@@ -90,8 +81,8 @@
             </Label>
 
             <!-- Card: Lost Items -->
-            <Rectangle fill="#3d5a7e" height="91.0" layoutX="258.0" layoutY="46.0" width="182.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" />
-            <ImageView layoutX="278.0" layoutY="59.0" fitWidth="45.0" fitHeight="45.0" preserveRatio="true">
+            <Rectangle fill="#3d5a7e" height="91.0" layoutX="258.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="278.0" layoutY="59.0" preserveRatio="true">
                <image>
                   <Image url="@../image/Lost%20Items.png" />
                </image>
@@ -108,8 +99,8 @@
             </Label>
 
             <!-- Card: Found Items -->
-            <Rectangle fill="#3da2bb" height="91.0" layoutX="471.0" layoutY="46.0" width="182.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" />
-            <ImageView layoutX="491.0" layoutY="59.0" fitWidth="45.0" fitHeight="45.0" preserveRatio="true">
+            <Rectangle fill="#3da2bb" height="91.0" layoutX="471.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="491.0" layoutY="59.0" preserveRatio="true">
                <image>
                   <Image url="@../image/Found%20Items.png" />
                </image>
@@ -126,8 +117,8 @@
             </Label>
 
             <!-- Card: Total Claims -->
-            <Rectangle fill="#4ccbd8" height="91.0" layoutX="683.0" layoutY="46.0" width="182.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" />
-            <ImageView layoutX="703.0" layoutY="59.0" fitWidth="45.0" fitHeight="45.0" preserveRatio="true">
+            <Rectangle fill="#4ccbd8" height="91.0" layoutX="683.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="703.0" layoutY="59.0" preserveRatio="true">
                <image>
                   <Image url="@../image/Total%20Claims.png" />
                </image>
@@ -151,10 +142,9 @@
             </Label>
 
             <!-- ScrollPane Recent Items -->
-            <ScrollPane fx:id="itemListScrollPane" layoutX="38.0" layoutY="190.0" prefHeight="270.0" prefWidth="884.0"
-                        style="-fx-background-color: transparent;" fitToWidth="true">
+            <ScrollPane fx:id="itemListScrollPane" fitToWidth="true" layoutX="38.0" layoutY="190.0" prefHeight="270.0" prefWidth="884.0" style="-fx-background-color: transparent;">
                <content>
-                  <FlowPane fx:id="itemListFlowPane" hgap="16" vgap="16" style="-fx-padding: 10;" />
+                  <FlowPane fx:id="itemListFlowPane" hgap="16" style="-fx-padding: 10;" vgap="16" />
                </content>
             </ScrollPane>
          </children>
