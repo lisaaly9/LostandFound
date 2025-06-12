@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" style="-fx-padding: 24;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormDetailLostItemController">
+    <ImageView fx:id="itemImageView" fitWidth="200" preserveRatio="true" />
+    <Label fx:id="itemNameLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+    <Label style="-fx-font-weight: bold;" text="Pemilik" />
+    <Label fx:id="finderNameLabel" />
+    <Label style="-fx-font-weight: bold;" text="Tanggal Hilang" />
+    <Label fx:id="dateLabel" />
+    <Label style="-fx-font-weight: bold;" text="Deskripsi" />
+    <Label fx:id="descriptionLabel" maxWidth="300" wrapText="true" />
+</VBox>

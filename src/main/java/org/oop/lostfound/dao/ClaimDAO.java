@@ -8,54 +8,65 @@ import java.util.List;
 
 public class ClaimDAO {
 
-    // Mengambil semua data klaim dari tabel claim
+    // Mengambil semua data klaim dari database
     public static List<Claim> getAllClaims() {
         List<Claim> claims = new ArrayList<>();
-
-        String query = """
-            SELECT 
-                c.id_claim,
-                c.claim_date,
-                c.status,
-                a.username AS claimant,
-                fi.item_name AS item_name
-            FROM claims c
-            JOIN account a ON c.id_account = a.id_account
-            JOIN found_item fi ON c.id_found_item = fi.id_item
-            ORDER BY c.claim_date DESC
-            """;
+        String sql = "SELECT * FROM claim_item";
 
         try (Connection conn = Connector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
+             PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Claim claim = new Claim(
-                    rs.getInt("id_claim"),
-                    rs.getTimestamp("claim_date").toLocalDateTime().toLocalDate(),
-                    ClaimStatus.valueOf(rs.getString("status")),
-                    rs.getString("claimant"),
-                    rs.getString("item_name")
-                );
+                Claim claim = new Claim();
+                claim.setClaimId(rs.getInt("id"));
+                claim.setItemName(rs.getString("item_name"));
+                Date foundDate = rs.getDate("found_date");
+                if (foundDate != null) {
+                    claim.setClaimDate(foundDate.toLocalDate());
+                }
+                claim.setFoundBy(rs.getString("finder_name"));
+                claim.setClaimedBy(rs.getString("claimant_name"));
+                claim.setDescription(rs.getString("description"));
+                claim.setClaimantPhone(rs.getString("claimant_phone"));
+                claim.setImageUrl(rs.getString("image_url"));
+                
+
                 claims.add(claim);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return claims;
     }
 
-    // Menyimpan data klaim baru ke tabel claim
-    public static void createClaim(Integer accountId, Integer foundItemId) throws SQLException {
-        String query = "INSERT INTO claims (id_account, id_found_item, status) VALUES (?, ?, ?)";
+    // Simpan data klaim ke database
+    public void insertClaimItem(Claim claimItem) {
+        String sql = "INSERT INTO claim_item (id, item_name, finder_name, found_date, description, image_url, claimant_name, claimant_phone, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try (Connection conn = Connector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, accountId);
-            stmt.setInt(2, foundItemId);
-            stmt.setString(3, ClaimStatus.PENDING.name());
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, claimItem.getClaimId());
+            stmt.setString(2, claimItem.getItemName());
+            stmt.setDate(3, claimItem.getClaimDate() != null ? Date.valueOf(claimItem.getClaimDate()) : null);
+            stmt.setString(4, claimItem.getFoundBy());
+            stmt.setString(5, claimItem.getClaimedBy());
+            stmt.setString(6, claimItem.getDescription());
+            stmt.setString(7, claimItem.getClaimantPhone());
+            stmt.setString(8, claimItem.getImageUrl());
+            
+            
+
             stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
 
     // Mengubah status klaim berdasarkan ID klaim
     public static void updateClaimStatus(Integer claimId, ClaimStatus status) throws SQLException {
@@ -65,6 +76,6 @@ public class ClaimDAO {
             stmt.setString(1, status.name());
             stmt.setInt(2, claimId);
             stmt.executeUpdate();
-        }
     }
+}
 }

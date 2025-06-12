@@ -29,7 +29,5 @@ public class LoginDAO {
         e.printStackTrace();
     }
     return null;
-}
-
-
+    }
 }

@@ -23,4 +23,8 @@ module org.oop.lostfound {
     opens org.oop.lostfound to javafx.fxml;
     exports org.oop.lostfound;
     exports org.oop.lostfound.controller;
+    exports org.oop.lostfound.model;
+    exports org.oop.lostfound.dao;
+    exports org.oop.lostfound.config;
+    
 }

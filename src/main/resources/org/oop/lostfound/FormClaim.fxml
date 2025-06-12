@@ -62,19 +62,13 @@
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" layoutX="376.0" layoutY="401.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="209.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Claim" textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-            </Button>
-            <TableView fx:id="tableClaim" layoutX="90.0" layoutY="64.0" prefHeight="327.0" prefWidth="782.0" style="-fx-background-color: #e9f3f2; -fx-border-color: #3d5a7e; -fx-text-fill: white;">
+            <TableView fx:id="tableClaim" layoutX="90.0" layoutY="64.0" prefHeight="327.0" prefWidth="780.0" style="-fx-background-color: #e9f3f2; -fx-border-color: #3d5a7e; -fx-text-fill: white;">
               <columns>
                 <TableColumn fx:id="columnClaimId" prefWidth="130.0" sortable="false" style="-fx-text-fill: white; -fx-background-color: #318991;" text="Claim Id" />
-                <TableColumn fx:id="columnClaimDate" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Claim Date" />
-                  <TableColumn fx:id="columnStatus" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Status" />
-                  <TableColumn fx:id="columnUser" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="User" />
-                  <TableColumn fx:id="columnItemName" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Item" />
-                  <TableColumn fx:id="columnAction" prefWidth="130.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Action" />
+                <TableColumn fx:id="columnClaimDate" prefWidth="165.33326721191406" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Claim Date" />
+                  <TableColumn fx:id="columnFoundBy" prefWidth="152.00003051757812" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Found By" />
+                  <TableColumn fx:id="columnClaimedBy" prefWidth="149.99993896484375" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Claimed By" />
+                  <TableColumn fx:id="columnItemName" prefWidth="180.0" style="-fx-background-color: #318991; -fx-text-fill: white;" text="Item" />
               </columns>
             </TableView>
          </children>

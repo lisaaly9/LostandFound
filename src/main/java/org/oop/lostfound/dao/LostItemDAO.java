@@ -62,11 +62,18 @@ public class LostItemDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                LostItem item = new LostItem(0, sql, sql, sql, null, sql, sql, null);
-                item.setId(rs.getInt("id_item")); 
-                item.setName(rs.getString("item_name")); 
-                item.setImageUrl(rs.getString("image_url"));
+                LostItem item = new LostItem(
+                    rs.getInt("id_item"),
+                    rs.getString("item_name"),
+                    rs.getString("description_item"),
+                    rs.getString("location_item"),
+                    Category.valueOf(rs.getString("category")),
+                    rs.getString("contact"),
+                    rs.getString("image_url"),
+                    rs.getDate("date_lost").toLocalDate()
+                );
                 lostItems.add(item);
+                
             }
         } catch (Exception e) {
             e.printStackTrace();

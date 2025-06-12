@@ -1,3 +1,4 @@
+-- Active: 1748963823865@@127.0.0.1@3306@pbo_db
 -- SQLBook: Code
 CREATE TABLE account (
     id_account INT AUTO_INCREMENT PRIMARY KEY,
@@ -35,4 +36,15 @@ CREATE TABLE lost_item (
     FOREIGN KEY (id_account) REFERENCES account(id_account)
         ON DELETE CASCADE
         ON UPDATE CASCADE
+);
+
+CREATE TABLE claim_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(100),
+    finder_name VARCHAR(100),
+    found_date DATE,
+    description TEXT,
+    image_url VARCHAR(255),
+    claimant_name VARCHAR(100),
+    claimant_phone VARCHAR(30)
 );

@@ -20,9 +20,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.oop.lostfound.config.Session;
 import org.oop.lostfound.enums.Category;
 import org.oop.lostfound.service.ImageKitService;
-import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.FoundItemDAO;
 
 public class FormFoundItemController {
@@ -221,9 +221,9 @@ public class FormFoundItemController {
             }
         }
 
-        // Kirim data ke databse melalui DAO
-        FoundItemDAO founditemDAO = new FoundItemDAO(Connector.getConnection());
-        boolean success = founditemDAO.insertFoundItem(itemName, description, location, uploadedImageUrl, dateFound, category, contact, 1);
+        FoundItemDAO founditemDAO = new FoundItemDAO();
+        int idAccount = Session.getId();
+        boolean success = founditemDAO.insertFoundItem(itemName, description, location, uploadedImageUrl, dateFound, category, contact, idAccount);
 
         submitButton.setText("Submit");
         submitButton.setDisable(false);

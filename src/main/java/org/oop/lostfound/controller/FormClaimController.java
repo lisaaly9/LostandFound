@@ -13,7 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-//import org.oop.lostfound.dao.ClaimDAO;
+import org.oop.lostfound.dao.ClaimDAO;
 import org.oop.lostfound.model.Claim;
 import org.oop.lostfound.enums.ClaimStatus;
 import javafx.fxml.FXMLLoader;
@@ -32,11 +32,32 @@ public class FormClaimController implements Initializable {
     @FXML private TableView<Claim> tableClaim;
     @FXML private TableColumn<Claim, Integer> columnClaimId;
     @FXML private TableColumn<Claim, String> columnClaimDate;
-    @FXML private TableColumn<Claim, ClaimStatus> columnStatus;
-    @FXML private TableColumn<Claim, String> columnUser;
+    @FXML private TableColumn<Claim, String> columnFoundBy;
+    @FXML private TableColumn<Claim, String> columnClaimedBy;
     @FXML private TableColumn<Claim, String> columnItemName;
-    @FXML private TableColumn<Claim, Void> columnAction;
 
+    public void refreshData() {
+        ClaimDAO dao = new ClaimDAO();
+        tableClaim.setItems(javafx.collections.FXCollections.observableArrayList(dao.getAllClaims()));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        
+        // Set up table columns
+        columnClaimId.setCellValueFactory(cellData -> 
+            new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getClaimId()).asObject());
+        columnClaimDate.setCellValueFactory(cellData -> 
+            new javafx.beans.property.SimpleStringProperty(cellData.getValue().getClaimDate() != null ? cellData.getValue().getClaimDate().toString() : ""));
+        columnFoundBy.setCellValueFactory(cellData -> 
+            new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFoundBy() != null ? cellData.getValue().getFoundBy() : ""));
+        columnClaimedBy.setCellValueFactory(cellData -> 
+            new javafx.beans.property.SimpleStringProperty(cellData.getValue().getClaimedBy() != null ? cellData.getValue().getClaimedBy() : ""));
+        columnItemName.setCellValueFactory(cellData -> 
+            new javafx.beans.property.SimpleStringProperty(cellData.getValue().getItemName() != null ? cellData.getValue().getItemName() : ""));
+    }
+        
     @FXML
     private void lostFoundButtonOnAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
@@ -91,12 +112,5 @@ public class FormClaimController implements Initializable {
         stage.show();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
-       // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
-    }
-
-    
     
 }
