@@ -29,7 +29,7 @@ public class LoginDAO
                     return new User(
                             rs.getInt("id_account"),
                             rs.getString("username"),
-                            rs.getString("phone"),
+                            rs.getString("phone_number"),
                             rs.getString("email"),
                             rs.getString("user_password")
                     );

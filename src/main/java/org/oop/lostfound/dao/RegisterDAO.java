@@ -12,7 +12,7 @@ public class RegisterDAO
     }
 
     public boolean registerUser(String username, String phone_number, String email, String user_password) {
-        String query = "INSERT INTO account(username, phone, email, user_password) VALUES(?,?,?,?)";
+        String query = "INSERT INTO account(username, phone_number, email, user_password) VALUES(?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query))
         {
             stmt.setString(1, username);
