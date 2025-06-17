@@ -1,20 +1,25 @@
 package org.oop.lostfound.config;
 
-//untuk menyimpan informasi sesi user yang sedang login
-public class Session {
+public class Session
+{
     private static int id;
     private static String username;
+    private static String role;
 
-    // Setter Getter ID dan Username
     public static void setId(int id) { Session.id = id; }
     public static int getId() { return id; }
 
     public static void setUsername(String username) { Session.username = username; }
     public static String getUsername() { return username; }
 
-    // Hapus data sesi (logout)
-    public static void clear() {
+    public static void setRole(String role) { Session.role = role; }
+    public static String getRole() { return role; }
+
+    // Hapus data saat logout
+    public static void clear()
+    {
         id = 0;
         username = null;
+        role = null;
     }
 }

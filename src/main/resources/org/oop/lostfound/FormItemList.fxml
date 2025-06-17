@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="252.0" prefWidth="270.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 15;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="252.0" prefWidth="270.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 15;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="24.0" prefWidth="379.0" spacing="40.0">
          <children>

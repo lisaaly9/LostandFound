@@ -21,17 +21,14 @@ public class ImageKitService {
         
         try {
             HttpPost uploadFile = new HttpPost(ImageKitConfig.UPLOAD_URL);
-            
-            // Membuat header authorization 
+
             String auth = ImageKitConfig.PRIVATE_KEY + ":";
             String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
             uploadFile.addHeader("Authorization", "Basic " + encodedAuth);
-            
-            // Membaca file sebagai byte array, lalu encode ke Base64
+
             byte[] fileContent = Files.readAllBytes(imageFile.toPath());
             String base64File = Base64.getEncoder().encodeToString(fileContent);
-            
-            // Multipart form-data
+
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.addTextBody("file", base64File);
             builder.addTextBody("fileName", fileName);
@@ -39,23 +36,21 @@ public class ImageKitService {
             
             HttpEntity multipart = builder.build();
             uploadFile.setEntity(multipart);
-            
-            // Eksekusi request upload
+
             CloseableHttpResponse response = httpClient.execute(uploadFile);
             String responseString = EntityUtils.toString(response.getEntity());
-            
-            // Parsing hasil respon
+
             ObjectMapper mapper = new ObjectMapper();
             JsonNode jsonNode = mapper.readTree(responseString);
-            
-            // Cek status sukses
+
             if (response.getStatusLine().getStatusCode() == 200) {
                 return jsonNode.get("url").asText();
             } else {
                 throw new IOException("Upload failed: " + responseString);
             }
             
-        } finally {
+        } finally
+        {
             httpClient.close();
         }
     }

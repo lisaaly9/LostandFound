@@ -5,22 +5,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class Connector {
+public class Connector
+{
     private static Connection conn = null;
     public static Connection getConnection()
     {
         String url = "jdbc:mysql://localhost:3306/pbo_db";
             String user = "root";
             String password = "";
-        try {
+        try
+        {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the database!");
-        } catch (ClassNotFoundException e) {
-            System.out.println("MySQL driver not found.");
+        } catch (ClassNotFoundException e)
+        {
+            System.out.println("MySQL driver tidak ada");
             e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Connection failed.");
+        } catch (SQLException e)
+        {
+            System.out.println("Koneksi Gagal");
             e.printStackTrace();
         }
         return conn;

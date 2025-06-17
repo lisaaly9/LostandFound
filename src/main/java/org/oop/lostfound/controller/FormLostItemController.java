@@ -35,7 +35,6 @@ public class FormLostItemController {
     @FXML private Button claimButton;
     @FXML private Button logOutButton; 
 
-    // Field input form barang hilang
     @FXML private TextField itemNameTextField;
     @FXML private TextField descriptionTextField;
     @FXML private TextField locationTextField;
@@ -46,7 +45,6 @@ public class FormLostItemController {
     @FXML private TextField contactTextField;
     @FXML private Button submitButton;
 
-    //preview gambar
     @FXML private ImageView imagePreview;
     @FXML private File selectedImageFile;
     @FXML private String uploadedImageUrl;
@@ -154,8 +152,7 @@ public class FormLostItemController {
     private void selectImageButtonOnAction(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Pilih Foto Barang");
-        
-        // Set extension filter (file yang boleh dipilih)
+
         FileChooser.ExtensionFilter extFilter = 
             new FileChooser.ExtensionFilter("Image files (*.png, *.jpg, *.jpeg)", "*.PNG", "*.png", "*.JPG", "*.jpg", "*.JPEG", "*.jpeg");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -165,8 +162,7 @@ public class FormLostItemController {
         
         if (selectedImageFile != null) {
             selectedImageLabel.setText(selectedImageFile.getName());
-            
-            // Show preview
+
             try {
                 Image image = new Image(selectedImageFile.toURI().toString());
                 imagePreview.setImage(image);
@@ -200,19 +196,17 @@ public class FormLostItemController {
             alert.showAndWait();
             return;
         }
-            // Upload image if selected
         uploadedImageUrl = null;
         if (selectedImageFile != null) {
             try {
-                // Show loading indicator
                 submitButton.setText("Uploading...");
                 submitButton.setDisable(true);
-                
-                // Upload to ImageKit
+
                 String fileName = System.currentTimeMillis() + "_" + selectedImageFile.getName();
                 uploadedImageUrl = ImageKitService.uploadImage(selectedImageFile, fileName);
                 
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 submitButton.setText("Submit");
                 submitButton.setDisable(false);
                 showAlert(AlertType.ERROR, "GAGAL", 
@@ -231,8 +225,6 @@ public class FormLostItemController {
         if (success) {
             showAlert(AlertType.INFORMATION, "BERHASIL", 
                     "DATA BARANG HILANG BERHASIL DISIMPAN!");
-            
-            // Kembali ke menu utama
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
             Parent parent = fxmlLoader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

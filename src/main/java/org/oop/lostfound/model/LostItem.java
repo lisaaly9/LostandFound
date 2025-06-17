@@ -20,7 +20,8 @@ public class LostItem extends Item implements IReportable {
         return "[LOST] " + getName() + " - " + getDescription();
     }
 
-    public void setDetails(String name, String description, String location, Category category, String contact, String imageUrl, LocalDate date) {
+    public void setDetails(String name, String description, String location, Category category, String contact, String imageUrl, LocalDate date)
+    {
         setName(name);
         setDescription(description);
         setLocation(location);

@@ -20,7 +20,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class FormReportUserController implements Initializable {
+public class FormReportUserController implements Initializable
+{
     @FXML private Button lostFoundButton;
     @FXML private Button lostItemButton;
     @FXML private Button foundItemButton;
@@ -57,7 +58,8 @@ public class FormReportUserController implements Initializable {
     }
 
     @FXML
-    private void foundItemButtonOnAction(ActionEvent event) throws IOException {
+    private void foundItemButtonOnAction(ActionEvent event) throws IOException
+    {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormFoundItem.fxml"));
         Parent parent = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -93,7 +95,8 @@ public class FormReportUserController implements Initializable {
     }
     
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
         columnReportId.setCellValueFactory(new PropertyValueFactory<>("reportId"));
         columnUser.setCellValueFactory(new PropertyValueFactory<>("user"));
         columnItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -102,7 +105,6 @@ public class FormReportUserController implements Initializable {
         columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         columnContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
 
-        // Styling untuk header kolom
         tableReport.setStyle("-fx-background-color: white;");
         
         // Styling individual untuk setiap header kolom
@@ -117,7 +119,8 @@ public class FormReportUserController implements Initializable {
         loadAllReports();
     }
 
-    private void loadAllReports() {
+    private void loadAllReports()
+    {
         List<Report> reports = ReportDAO.getAllReports();
         tableReport.getItems().setAll(reports);
     }

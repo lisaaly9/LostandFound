@@ -11,45 +11,54 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormMenuUtamaController">
+<BorderPane prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" stylesheets="@../style/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormMenuUtamaController">
 
    <!-- Bagian Atas -->
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="960.0" style="-fx-background-color: #3b3a55;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparent;" text="Lost &amp; Found" textFill="WHITE">
+            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false"  onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Lost &amp; Found" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
             </Button>
-            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="23.0" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparent;" text="Lost Item" textFill="WHITE">
+            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparent;" text="Lost Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparent;" text="Found Item" textFill="WHITE">
+            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparent;" text="Found Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="reportButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparent;" text="Report" textFill="WHITE">
+            <Button fx:id="reportButton" layoutX="429.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparent;" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="claimButton" layoutX="503.0" layoutY="23.0" mnemonicParsing="false" onAction="#claimButtonOnAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: transparent;" text="Claim" textFill="WHITE">
+            <Button fx:id="claimButton" layoutX="503.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#claimButtonOnAction" style="-fx-background-color: transparent;" text="Claim" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20;" text="Log Out" textFill="WHITE">
+
+            <Label fx:id="adminLabel"
+                   layoutX="730.0"
+                   layoutY="30.0"
+                   text="ADMIN"
+                   textFill="YELLOW"
+                   visible="false"
+                   style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+
+            <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20; -fx-cursor: hand;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
             <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="806.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Log%20Out.png" />
+                  <Image url="@../image/Log Out.png" />
                </image>
             </ImageView>
          </children>
@@ -69,6 +78,11 @@
 
             <!-- Card: Total Items -->
             <Rectangle fill="#3b3a55" height="91.0" layoutX="45.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="62.0" layoutY="59.0" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Total Items.png" />
+               </image>
+            </ImageView>
             <Label layoutX="118.0" layoutY="58.0" text="Total Items" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="13.0" />
@@ -84,7 +98,7 @@
             <Rectangle fill="#3d5a7e" height="91.0" layoutX="258.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
             <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="278.0" layoutY="59.0" preserveRatio="true">
                <image>
-                  <Image url="@../image/Lost%20Items.png" />
+                  <Image url="@../image/Lost Items.png" />
                </image>
             </ImageView>
             <Label layoutX="331.0" layoutY="59.0" text="Lost Items" textFill="WHITE">
@@ -102,7 +116,7 @@
             <Rectangle fill="#3da2bb" height="91.0" layoutX="471.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
             <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="491.0" layoutY="59.0" preserveRatio="true">
                <image>
-                  <Image url="@../image/Found%20Items.png" />
+                  <Image url="@../image/Found Items.png" />
                </image>
             </ImageView>
             <Label layoutX="544.0" layoutY="59.0" text="Found Items" textFill="WHITE">
@@ -120,7 +134,7 @@
             <Rectangle fill="#4ccbd8" height="91.0" layoutX="683.0" layoutY="46.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="182.0" />
             <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="703.0" layoutY="59.0" preserveRatio="true">
                <image>
-                  <Image url="@../image/Total%20Claims.png" />
+                  <Image url="@../image/Total Claims.png" />
                </image>
             </ImageView>
             <Label layoutX="756.0" layoutY="59.0" text="Total Claims" textFill="WHITE">
@@ -140,6 +154,7 @@
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
+            <Button fx:id="shrinkImagesButton" layoutX="220.0" layoutY="163.0" text="Sembunyikan Gambar" onAction="#shrinkImagesButtonOnAction" />
 
             <!-- ScrollPane Recent Items -->
             <ScrollPane fx:id="itemListScrollPane" fitToWidth="true" layoutX="38.0" layoutY="190.0" prefHeight="270.0" prefWidth="884.0" style="-fx-background-color: transparent;">

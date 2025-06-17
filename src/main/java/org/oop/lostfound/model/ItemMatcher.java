@@ -2,7 +2,8 @@ package org.oop.lostfound.model;
 
 import java.util.*;
 
-public class ItemMatcher {
+public class ItemMatcher
+{
     public static List<Item> matchItems(List<LostItem> lostItems, List<FoundItem> foundItems) {
         List<Item> matches = new ArrayList<>();
         for (LostItem lost : lostItems) {
