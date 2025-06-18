@@ -35,32 +35,32 @@ public class FormRegisterController {
 
     @FXML
     private void usernameTextFieldOnAction(ActionEvent event) {
-        Stage stage = (Stage) usernameTextField.getScene().getWindow();
-        stage.close();
+
     }
 
     @FXML
     private void phoneTextFieldOnAction(ActionEvent event) {
-        Stage stage = (Stage) phoneTextField.getScene().getWindow();
-        stage.close();
+
     }
 
     @FXML
     private void emailTextFieldOnAction(ActionEvent event) {
-        Stage stage = (Stage) emailTextField.getScene().getWindow();
-        stage.close();
+
     }
 
-    @FXML
+        @FXML
     private void passwordFieldOnAction(ActionEvent event) {
-        Stage stage = (Stage) passwordField.getScene().getWindow();
-        stage.close();
+        try {
+            registerButtonOnAction(event);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Bisa tambahkan alert jika ingin
+        }
     }
 
     @FXML
     private void retypePasswordFieldOnAction(ActionEvent event) {
-        Stage stage = (Stage) retypePasswordField.getScene().getWindow();
-        stage.close();
+
     }
 
     @FXML

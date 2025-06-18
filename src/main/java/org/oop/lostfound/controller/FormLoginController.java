@@ -35,14 +35,12 @@ public class FormLoginController {
 
     @FXML
     private void usernameTextFieldOnAction(ActionEvent event) {
-        Stage stage = (Stage) usernameTextField.getScene().getWindow();
-        stage.close();
+        passwordField.requestFocus();
     }
-
+    
     @FXML
-    private void passwordFieldOnAction(ActionEvent event) {
-        Stage stage = (Stage) passwordField.getScene().getWindow();
-        stage.close();
+    private void passwordFieldOnAction(ActionEvent event) throws IOException {
+        loginButtonOnAction(event);
     }
 
     @FXML
