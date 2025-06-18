@@ -110,9 +110,9 @@
             </HBox>
 
             <!-- Preview Image -->
-            <ImageView fx:id="imagePreview" layoutX="650.0" layoutY="321.0" fitHeight="100.0" fitWidth="150.0"
+            <!--ImageView fx:id="imagePreview" layoutX="650.0" layoutY="321.0" fitHeight="100.0" fitWidth="150.0"
                        pickOnBounds="true" preserveRatio="true"
-                       style="-fx-border-color: #cccccc; -fx-border-width: 1;" visible="false" />
+                       style="-fx-border-color: #cccccc; -fx-border-width: 1;" visible="true" /-->
 
             <!-- Submit -->
             <Button fx:id="submitButton" layoutX="377.0" layoutY="430.0" alignment="CENTER"
