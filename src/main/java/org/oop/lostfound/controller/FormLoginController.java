@@ -18,77 +18,112 @@ import org.oop.lostfound.config.Session;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LoginDAO;
 import org.oop.lostfound.model.User;
+import org.oop.lostfound.dao.LoginDAO;
+import org.oop.lostfound.dao.LoginAdminDAO;
+import org.oop.lostfound.model.User;
+import org.oop.lostfound.model.Admin;
 
 
-public class FormLoginController {
+public class FormLoginController
+{
     @FXML private TextField usernameTextField;
     @FXML private PasswordField passwordField;
     @FXML private Hyperlink registerHyperlink;
     @FXML private Button loginButton;
     
-    //diinisialisasi, session user direset (logout)
+    // Logout untuk setiap launch
     @FXML
-    public void initialize() {
+    public void initialize()
+    {
         Session.setId(0);
         Session.setUsername(null);
     }
 
     @FXML
+<<<<<<< HEAD
     private void usernameTextFieldOnAction(ActionEvent event) {
+=======
+    private void usernameTextFieldOnAction(ActionEvent event)
+    {
+>>>>>>> 200c5db3b83506382f1f5964e262caeaebadcbfb
         passwordField.requestFocus();
     }
     
     @FXML
+<<<<<<< HEAD
     private void passwordFieldOnAction(ActionEvent event) throws IOException {
+=======
+    private void passwordFieldOnAction(ActionEvent event) throws IOException
+    {
+>>>>>>> 200c5db3b83506382f1f5964e262caeaebadcbfb
         loginButtonOnAction(event);
     }
 
     @FXML
-    private void registerHyperlinkOnAction(ActionEvent event) throws IOException {
+    private void registerHyperlinkOnAction(ActionEvent event) throws IOException
+    {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormRegister.fxml"));
         Parent parent = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(parent));
         stage.show();
     }
+
+    // Login
     @FXML
     private void loginButtonOnAction(ActionEvent event) throws IOException {
-        String username = usernameTextField.getText();
-        String user_password = passwordField.getText();
-        if (username.isEmpty() || user_password.isEmpty()) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("PESAN PERINGATAN");
-            alert.setHeaderText(null);
-            alert.setContentText("Username atau Password tidak boleh kosong!");
-            alert.showAndWait();
-            return;
-        }
-        LoginDAO loginDAO = new LoginDAO(Connector.getConnection());
-        User user = loginDAO.checkLogin(username, user_password);
-            if (user != null) {
-                Session.setId(user.getId());
-                Session.setUsername(user.getUsername());
+        String usernameOrEmail = usernameTextField.getText();
+        String password = passwordField.getText();
 
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("PESAN SUKSES");
+        LoginDAO loginDAO = new LoginDAO(Connector.getConnection());
+        User user = loginDAO.checkLogin(usernameOrEmail, password);
+
+        if (user != null) {
+            Session.setId(user.getId());
+            Session.setUsername(user.getUsername());
+            Session.setRole("user"); // Tambahkan baris ini
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Login Berhasil");
+            alert.setHeaderText(null);
+            alert.setContentText("Selamat datang, " + user.getUsername() + "!");
+            alert.showAndWait();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
+            Parent parent = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            return;
+        } else {
+            LoginAdminDAO adminDAO = new LoginAdminDAO(Connector.getConnection());
+            Admin admin = adminDAO.checkLogin(usernameOrEmail, password);
+
+            if (admin != null) {
+                Session.setId(admin.getId());
+                Session.setUsername(admin.getUsername());
+                Session.setRole("admin");
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Login Admin Berhasil");
                 alert.setHeaderText(null);
-                alert.setContentText("LOGIN BERHASIL");
+                alert.setContentText("Selamat datang Admin, " + admin.getUsername() + "!");
                 alert.showAndWait();
-                
+
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
                 Parent parent = fxmlLoader.load();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(parent));
                 stage.show();
-                
-            } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("PESAN ERROR");
-                alert.setHeaderText(null);
-                alert.setContentText("LOGIN GAGAL");
-                alert.showAndWait();
                 return;
+            } else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Gagal");
+                alert.setHeaderText(null);
+                alert.setContentText("Username/email atau password salah!");
+                alert.showAndWait();
             }
-        
+        }
     }
 }

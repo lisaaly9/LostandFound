@@ -11,7 +11,6 @@ public class Report {
     private LocalDate date;
     private String contact;
 
-    // Constructor
     public Report(int reportId, String user, String itemName, String type, String location, LocalDate date, String contact) {
         this.reportId = reportId;
         this.user = user;
@@ -22,15 +21,8 @@ public class Report {
         this.contact = contact;
     }
 
-    // Getter dan Setter
-    public int getReportId() {return reportId;}
-    public void setReportId(int reportId) {this.reportId = reportId;}
-
     public String getUser() {return user;}
     public void setUser(String user) {this.user = user;}
-
-    public String getItemName() {return itemName;}
-    public void setItemName(String itemName) {this.itemName = itemName;}
 
     public String getType() {return type;}
     public void setType(String type) {this.type = type;}

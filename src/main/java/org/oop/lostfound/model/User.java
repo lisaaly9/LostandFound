@@ -1,25 +1,31 @@
 package org.oop.lostfound.model;
 
-//Encapsulation
-public class User {
-   private int id;
-    private String username;
+public class User
+{
+    protected int id;
+    protected String username;
+    protected String phone;
+    protected String email;
+    protected String password;
 
-    //Konstruktor
-    public User(int id, String username) {
+    public User(int id, String username, String phone, String email, String password)
+    {
         this.id = id;
         this.username = username;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
     }
-    // getter
+
     public int getId() { return id; }
     public String getUsername() { return username; }
+    public String getPhone() { return phone; }
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
 
-
-    //digunakan nanti
-    // public void tambahClaim(Claim claim) {
-    //     daftarClaim.add(claim);
-    // }
-    // public ArrayList<Claim> getDaftarClaim() {
-    //     return daftarClaim;
-    // }
+    public void setId(int id) { this.id = id; }
+    public void setUsername(String username) { this.username = username; }
+    public void setPhone(String phone) { this.phone = phone; }
+    public void setEmail(String email) { this.email = email; }
+    public void setPassword(String password) { this.password = password; }
 }

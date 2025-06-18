@@ -7,7 +7,6 @@ import java.util.List;
 
 public class ReportDAO {
 
-    //Mengambil semua data laporan dari tabel lost_item dan found_item
     public static List<Report> getAllReports() {
         List<Report> reports = new ArrayList<>();
 
@@ -41,9 +40,11 @@ public class ReportDAO {
 
         try (Connection conn = Connector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             ResultSet rs = stmt.executeQuery())
+        {
 
-            while (rs.next()) {
+            while (rs.next())
+            {
                 Report report = new Report(
                     rs.getInt("report_id"),
                     rs.getString("user"),

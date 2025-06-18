@@ -2,7 +2,8 @@ package org.oop.lostfound.model;
 
 import java.time.LocalDate;
 
-public class Claim {
+public class Claim
+{
     private int claimId;
     private String itemName;
     private LocalDate claimDate;
@@ -12,7 +13,8 @@ public class Claim {
     private String claimantPhone;
     private String imageUrl;
 
-    public Claim() {
+    public Claim()
+    {
     }
 
     public Claim(int claimId, String itemName, LocalDate claimDate, String foundBy, String claimedBy, String description, String claimantPhone, String imageUrl) {
@@ -20,13 +22,12 @@ public class Claim {
         this.itemName = itemName;
         this.claimDate = claimDate;
         this.foundBy = foundBy;
-        this.claimedBy = claimedBy; 
+        this.claimedBy = claimedBy;
         this.description = description;
         this.claimantPhone = claimantPhone;
         this.imageUrl = imageUrl;
     }
 
-    // Getter & Setter
     public int getClaimId() { return claimId; }
     public void setClaimId(int claimId) { this.claimId = claimId; }
 
@@ -51,5 +52,5 @@ public class Claim {
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-    
+
 }
