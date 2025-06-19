@@ -14,21 +14,14 @@ import java.util.Optional;
 
 public class FormDetailLostItemAdminController
 {
-    @FXML
-    private Label itemNameLabel;
-    @FXML
-    private ImageView itemImageView;
-    @FXML
-    private Label finderNameLabel;
-    @FXML
-    private Label dateLabel;
-    @FXML
-    private Label descriptionLabel;
-    @FXML
-    private Button deleteButton;
-
-    private LostItem lostItem;
-    private FormMenuUtamaController parentController;
+    @FXML private Label itemNameLabel;
+    @FXML private ImageView itemImageView;
+    @FXML private Label finderNameLabel;
+    @FXML private Label dateLabel;
+    @FXML private Label descriptionLabel;
+    @FXML private Button deleteButton;
+    @FXML private LostItem lostItem;
+    @FXML private FormMenuUtamaController parentController;
 
     public void setLostItem(LostItem lostItem)
     {

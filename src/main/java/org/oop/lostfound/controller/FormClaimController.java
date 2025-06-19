@@ -37,25 +37,17 @@ public class FormClaimController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        // Setup cell value factories
+       
         columnClaimId.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getClaimId()).asObject());
         columnClaimDate.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
-                        cellData.getValue().getClaimDate() != null ?
-                                cellData.getValue().getClaimDate().toString() : ""));
+                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getClaimDate() != null ?cellData.getValue().getClaimDate().toString() : ""));
         columnFoundBy.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
-                        cellData.getValue().getFoundBy() != null ?
-                                cellData.getValue().getFoundBy() : ""));
+                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFoundBy() != null ?cellData.getValue().getFoundBy() : ""));
         columnClaimedBy.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
-                        cellData.getValue().getClaimedBy() != null ?
-                                cellData.getValue().getClaimedBy() : ""));
+                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getClaimedBy() != null ?cellData.getValue().getClaimedBy() : ""));
         columnItemName.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
-                        cellData.getValue().getItemName() != null ?
-                                cellData.getValue().getItemName() : ""));
+                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getItemName() != null ?cellData.getValue().getItemName() : ""));
 
         refreshData();
     }

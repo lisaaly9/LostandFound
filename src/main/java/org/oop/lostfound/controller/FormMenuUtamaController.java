@@ -6,64 +6,43 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.net.URL;
-
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.sql.Connection;
 import java.util.ResourceBundle;
-
 import org.oop.lostfound.dao.ClaimDAO;
 import org.oop.lostfound.dao.Connector;
 import org.oop.lostfound.dao.LostItemDAO;
 import org.oop.lostfound.dao.FoundItemDAO;
-//import org.oop.lostfound.dao.ClaimItemDAO;
-
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
-
 import org.oop.lostfound.config.Session;
 
 public class FormMenuUtamaController implements javafx.fxml.Initializable
 {
-    @FXML
-    private Button lostFoundButton;
-    @FXML
-    private Button lostItemButton;
-    @FXML
-    private Button foundItemButton;
-    @FXML
-    private Button reportButton;
-    @FXML
-    private Button claimButton;
-    @FXML
-    private Button logOutButton;
-    @FXML
-    private Button shrinkImagesButton;
-
+    @FXML private Button lostFoundButton;
+    @FXML private Button lostItemButton;
+    @FXML private Button foundItemButton;
+    @FXML private Button reportButton;
+    @FXML private Button claimButton;
+    @FXML private Button logOutButton;
+    @FXML private Button shrinkImagesButton;
 
     // Label untuk setiap counter di dashboard
-    @FXML
-    private Label totalItemsCountLabel;
-    @FXML
-    private Label lostItemsCountLabel;
-    @FXML
-    private Label foundItemsCountLabel;
-    @FXML
-    private Label totalClaimsCountLabel;
-    @FXML
-    private FlowPane itemListFlowPane;
-    @FXML
-    private Label adminLabel;
-
-    private double imageWidth = 180;
-    private double imageHeight = 90;
-    private boolean isShrink = false;
+    @FXML private Label totalItemsCountLabel;
+    @FXML private Label lostItemsCountLabel;
+    @FXML private Label foundItemsCountLabel;
+    @FXML private Label totalClaimsCountLabel;
+    @FXML private FlowPane itemListFlowPane;
+    @FXML private Label adminLabel;
+    @FXML private double imageWidth = 180;
+    @FXML private double imageHeight = 90;
+    @FXML private boolean isShrink = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)

@@ -17,7 +17,6 @@ import org.oop.lostfound.dao.FoundItemDAO;
 import org.oop.lostfound.dao.ClaimDAO;
 import org.oop.lostfound.model.Claim;
 import org.oop.lostfound.model.FoundItem;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;

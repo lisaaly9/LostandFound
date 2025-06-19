@@ -37,8 +37,7 @@ public class FormReportUserController implements Initializable
     @FXML private TableColumn<Report, String> columnLocation;
     @FXML private TableColumn<Report, LocalDate> columnDate;
     @FXML private TableColumn<Report, String> columnContact;
-
-
+    
     @FXML
     private void lostFoundButtonOnAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
@@ -106,8 +105,6 @@ public class FormReportUserController implements Initializable
         columnContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
 
         tableReport.setStyle("-fx-background-color: white;");
-        
-        // Styling individual untuk setiap header kolom
         columnReportId.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
         columnUser.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
         columnItemName.setStyle("-fx-background-color: #318991; -fx-text-fill: white;");
@@ -124,6 +121,5 @@ public class FormReportUserController implements Initializable
         List<Report> reports = ReportDAO.getAllReports();
         tableReport.getItems().setAll(reports);
     }
-
 
 }

@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import org.oop.lostfound.model.FoundItem;
 import org.oop.lostfound.dao.FoundItemDAO;
 import javafx.scene.control.Alert;
-
 import java.util.Optional;
 
 public class FormDetailFoundItemAdminController {
@@ -21,9 +20,8 @@ public class FormDetailFoundItemAdminController {
     @FXML private Label dateLabel;
     @FXML private Label descriptionLabel;
     @FXML private Button deleteButton;
-
-    private FoundItem foundItem;
-    private FormMenuUtamaController parentController;
+    @FXML private FoundItem foundItem;
+    @FXML private FormMenuUtamaController parentController;
 
     public void setParentController(FormMenuUtamaController parentController)
     {

@@ -68,6 +68,7 @@
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
+            <!-- TableView -->
             <TableView fx:id="tableReport" layoutX="90.0" layoutY="64.0" prefHeight="327.0" prefWidth="782.0" style="-fx-border-color: #3d5a7e; -fx-background-color: white;">
               <columns>
                 <TableColumn fx:id="columnReportId" prefWidth="110.0" sortable="false" style="-fx-background-color: #318991;" text="Report Id" />
