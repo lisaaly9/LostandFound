@@ -44,6 +44,10 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable
     @FXML private double imageHeight = 90;
     @FXML private boolean isShrink = false;
 
+    @FXML private javafx.scene.control.ComboBox<org.oop.lostfound.enums.Category> categoryFilterComboBox;
+    @FXML private javafx.scene.control.DatePicker dateFilterPicker;
+    @FXML private javafx.scene.control.Button clearFilterButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -57,6 +61,24 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable
             itemListFlowPane.setHgap(10);
             itemListFlowPane.setVgap(10);
             itemListFlowPane.setPrefWrapLength(800);
+        }
+
+        // Inisialisasi filter kategori
+        if (categoryFilterComboBox != null) {
+            categoryFilterComboBox.getItems().add(null); // Untuk opsi 'semua'
+            categoryFilterComboBox.getItems().addAll(org.oop.lostfound.enums.Category.values());
+            categoryFilterComboBox.setPromptText("Kategori");
+            categoryFilterComboBox.setOnAction(e -> loadItemList());
+        }
+        if (dateFilterPicker != null) {
+            dateFilterPicker.setOnAction(e -> loadItemList());
+        }
+        if (clearFilterButton != null) {
+            clearFilterButton.setOnAction(e -> {
+                categoryFilterComboBox.setValue(null);
+                dateFilterPicker.setValue(null);
+                loadItemList();
+            });
         }
 
         updateDashboardData();
@@ -320,37 +342,31 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable
         loadItemList();
     }
 
-    private void loadItemList()
-    {
-        try
-        {
+    private void loadItemList() {
+        try {
             Connection connection = Connector.getConnection();
             LostItemDAO lostItemDAO = new LostItemDAO(connection);
             FoundItemDAO foundItemDAO = new FoundItemDAO();
-
             itemListFlowPane.getChildren().clear();
-
-            java.util.List<?> lostItems = lostItemDAO.getAllLostItems();
-            java.util.List<?> foundItems = foundItemDAO.getAllFoundItems();
-
-            // Tampilkan LostItem
-            for (var item : lostItems)
-            {
-                org.oop.lostfound.model.LostItem lostItem = (org.oop.lostfound.model.LostItem) item;
-                itemListFlowPane.getChildren().add(createLostItemVBox(lostItem));
+            org.oop.lostfound.enums.Category selectedCategory = categoryFilterComboBox != null ? categoryFilterComboBox.getValue() : null;
+            java.time.LocalDate selectedDate = dateFilterPicker != null ? dateFilterPicker.getValue() : null;
+            java.util.List<org.oop.lostfound.model.LostItem> lostItems = lostItemDAO.getAllLostItems();
+            java.util.List<org.oop.lostfound.model.FoundItem> foundItems = foundItemDAO.getAllFoundItems();
+            // Filter LostItem
+            for (var lostItem : lostItems) {
+                boolean match = true;
+                if (selectedCategory != null && !lostItem.getCategory().equals(selectedCategory)) match = false;
+                if (selectedDate != null && !lostItem.getDate().equals(selectedDate)) match = false;
+                if (match) itemListFlowPane.getChildren().add(createLostItemVBox(lostItem));
             }
-
-            // Tampilkan FoundItem
-            for (var item : foundItems)
-            {
-                org.oop.lostfound.model.FoundItem foundItem = (org.oop.lostfound.model.FoundItem) item;
-                itemListFlowPane.getChildren().add(createFoundItemVBox(foundItem));
+            // Filter FoundItem
+            for (var foundItem : foundItems) {
+                boolean match = true;
+                if (selectedCategory != null && !foundItem.getCategory().equals(selectedCategory)) match = false;
+                if (selectedDate != null && !foundItem.getDate().equals(selectedDate)) match = false;
+                if (match) itemListFlowPane.getChildren().add(createFoundItemVBox(foundItem));
             }
-
-            System.out.println("Loaded " + lostItems.size() + " lost items and " + foundItems.size() + " found items");
-
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error loading item list: " + e.getMessage());
         }
@@ -445,5 +461,12 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(parent));
         stage.show();
+    }
+
+    @FXML
+    private void clearFilterButtonOnAction() {
+        if (categoryFilterComboBox != null) categoryFilterComboBox.setValue(null);
+        if (dateFilterPicker != null) dateFilterPicker.setValue(null);
+        loadItemList();
     }
 }

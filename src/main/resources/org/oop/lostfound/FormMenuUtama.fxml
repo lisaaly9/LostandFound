@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -11,45 +13,39 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" stylesheets="@../style/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormMenuUtamaController">
+<BorderPane prefHeight="560.0" prefWidth="960.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.lostfound.controller.FormMenuUtamaController">
 
    <!-- Bagian Atas -->
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="960.0" style="-fx-background-color: #3b3a55;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false"  onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Lost &amp; Found" textFill="WHITE">
+            <Button fx:id="lostFoundButton" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#lostFoundButtonOnAction" prefHeight="61.0" prefWidth="226.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Lost &amp; Found" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT Bold" size="32.0" />
                </font>
             </Button>
-            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparent;" text="Lost Item" textFill="WHITE">
+            <Button fx:id="lostItemButton" layoutX="226.0" layoutY="30.0" mnemonicParsing="false" onAction="#lostItemButtonOnAction" style="-fx-background-color: transparent;" styleClass="menu-hover" text="Lost Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparent;" text="Found Item" textFill="WHITE">
+            <Button fx:id="foundItemButton" layoutX="320.0" layoutY="30.0" mnemonicParsing="false" onAction="#foundItemButtonOnAction" style="-fx-background-color: transparent;" styleClass="menu-hover" text="Found Item" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="reportButton" layoutX="429.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparent;" text="Report" textFill="WHITE">
+            <Button fx:id="reportButton" layoutX="429.0" layoutY="30.0" mnemonicParsing="false" onAction="#reportButtonOnAction" style="-fx-background-color: transparent;" styleClass="menu-hover" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="claimButton" layoutX="503.0" layoutY="30.0" styleClass="menu-hover" mnemonicParsing="false" onAction="#claimButtonOnAction" style="-fx-background-color: transparent;" text="Claim" textFill="WHITE">
+            <Button fx:id="claimButton" layoutX="503.0" layoutY="30.0" mnemonicParsing="false" onAction="#claimButtonOnAction" style="-fx-background-color: transparent;" styleClass="menu-hover" text="Claim" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
 
-            <Label fx:id="adminLabel"
-                   layoutX="730.0"
-                   layoutY="30.0"
-                   text="ADMIN"
-                   textFill="YELLOW"
-                   visible="false"
-                   style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+            <Label fx:id="adminLabel" layoutX="730.0" layoutY="30.0" style="-fx-font-weight: bold; -fx-font-size: 16px;" text="ADMIN" textFill="YELLOW" visible="false" />
 
             <Button fx:id="logOutButton" alignment="BOTTOM_RIGHT" layoutX="794.0" layoutY="25.0" mnemonicParsing="false" onAction="#logOutButtonOnAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #4ccbd8; -fx-background-radius: 20; -fx-cursor: hand;" text="Log Out" textFill="WHITE">
                <font>
@@ -148,13 +144,19 @@
                </font>
             </Label>
 
+            <!-- Filter Section -->
+            <Label layoutX="521.0" layoutY="154.0" text="Filter:" />
+            <ComboBox fx:id="categoryFilterComboBox" layoutX="562.0" layoutY="150.0" prefWidth="150.0" promptText="Kategori" />
+            <DatePicker fx:id="dateFilterPicker" layoutX="724.0" layoutY="150.0" prefHeight="25.0" prefWidth="111.0" promptText="Tanggal" />
+            <Button fx:id="clearFilterButton" layoutX="842.0" layoutY="150.0" onAction="#clearFilterButtonOnAction" text="Reset" />
+
             <!-- Label Recent Items -->
-            <Label layoutX="38.0" layoutY="158.0" text="Recent Items">
+            <Label layoutX="43.0" layoutY="149.0" text="Recent Items">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="shrinkImagesButton" layoutX="220.0" layoutY="163.0" text="Sembunyikan Gambar" onAction="#shrinkImagesButtonOnAction" />
+            <Button fx:id="shrinkImagesButton" layoutX="206.0" layoutY="150.0" onAction="#shrinkImagesButtonOnAction" text="Sembunyikan Gambar" />
 
             <!-- ScrollPane Recent Items -->
             <ScrollPane fx:id="itemListScrollPane" fitToWidth="true" layoutX="38.0" layoutY="190.0" prefHeight="270.0" prefWidth="884.0" style="-fx-background-color: transparent;">
