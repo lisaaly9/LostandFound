@@ -26,6 +26,7 @@ public class FormLoginController
     @FXML private PasswordField passwordField;
     @FXML private Hyperlink registerHyperlink;
     @FXML private Button loginButton;
+    @FXML private Button guestButton;
     
     // Logout untuk setiap launch
     @FXML
@@ -113,5 +114,19 @@ public class FormLoginController
                 alert.showAndWait();
             }
         }
+    }
+
+    @FXML
+    private void guestButtonOnAction(ActionEvent event) throws IOException {
+        // Set session guest
+        Session.setId(0);
+        Session.setUsername("Guest");
+        Session.setRole("guest");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/oop/lostfound/FormMenuUtama.fxml"));
+        Parent parent = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 }

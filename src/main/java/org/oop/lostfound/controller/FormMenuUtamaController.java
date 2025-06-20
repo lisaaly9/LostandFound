@@ -56,6 +56,15 @@ public class FormMenuUtamaController implements javafx.fxml.Initializable
             adminLabel.setVisible("admin".equalsIgnoreCase(Session.getRole()));
         }
 
+        // Disable fitur untuk guest
+        if ("guest".equalsIgnoreCase(Session.getRole())) {
+            if (claimButton != null) claimButton.setDisable(true);
+            if (reportButton != null) reportButton.setDisable(true);
+            if (lostItemButton != null) lostItemButton.setDisable(true);
+            if (foundItemButton != null) foundItemButton.setDisable(true);
+            if (logOutButton != null) logOutButton.setDisable(false);
+        }
+
         if (itemListFlowPane != null)
         {
             itemListFlowPane.setHgap(10);

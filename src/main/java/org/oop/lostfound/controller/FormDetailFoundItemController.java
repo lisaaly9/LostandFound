@@ -69,6 +69,14 @@ public class FormDetailFoundItemController implements Initializable
         {
             claimButton.setOnAction(event -> handleClaim());
         }
+
+        // Disable claim button untuk guest
+        if (claimButton != null && "guest".equalsIgnoreCase(org.oop.lostfound.config.Session.getRole())) {
+            claimButton.setDisable(true);
+            claimButton.setOnAction(event -> {
+                showAlert(AlertType.INFORMATION, "Akses Ditolak", "Silakan login untuk klaim barang.");
+            });
+        }
     }
 
     public static void showDetail(FoundItem foundItem)
