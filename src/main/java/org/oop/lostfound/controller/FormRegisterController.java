@@ -110,6 +110,15 @@ public class FormRegisterController
         }
 
         RegisterDAO registerDAO = new RegisterDAO(Connector.getConnection());
+        if (registerDAO.isUsernameTaken(username)) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("PESAN PERINGATAN");
+            alert.setHeaderText(null);
+            alert.setContentText("Username sudah terpakai, silakan pakai username lain!");
+            alert.showAndWait();
+            return;
+        }
+
         boolean success = registerDAO.registerUser(username, phone_number, email, user_password);
 
         if (success)

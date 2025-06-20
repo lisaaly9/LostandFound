@@ -75,6 +75,10 @@ public class FormRegisterAdminController
         }
 
         RegisterAdminDAO dao = new RegisterAdminDAO(Connector.getConnection());
+        if (dao.isUsernameTaken(username)) {
+            showAlert(Alert.AlertType.WARNING, "Peringatan", "Username sudah terpakai, silakan pakai username lain!");
+            return;
+        }
         boolean success = dao.registerAdmin(username, phone, email, password);
 
         if (success) {

@@ -27,4 +27,16 @@ public class RegisterDAO
             return false;
         }
     }
+
+    public boolean isUsernameTaken(String username) {
+        String query = "SELECT username FROM account WHERE username = ? UNION SELECT username FROM admin WHERE username = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, username);
+            stmt.setString(2, username);
+            return stmt.executeQuery().next();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
