@@ -89,6 +89,16 @@ public class FormRegisterController
             return;
         }
 
+        if (!email.contains("@") || !email.contains("."))
+        {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("PESAN PERINGATAN");
+            alert.setHeaderText(null);
+            alert.setContentText("EMAIL TIDAK VALID!");
+            alert.showAndWait();
+            return;
+        }
+
         if (!user_password.equals(retype_password))
         {
             Alert alert = new Alert(AlertType.ERROR);

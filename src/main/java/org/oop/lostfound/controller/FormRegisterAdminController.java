@@ -64,6 +64,11 @@ public class FormRegisterAdminController
             return;
         }
 
+        if (!email.contains("@") || !email.contains(".")) {
+            showAlert(Alert.AlertType.WARNING, "Peringatan", "Email tidak valid!");
+            return;
+        }
+
         if (!password.equals(retypePassword)) {
             showAlert(Alert.AlertType.ERROR, "Error", "Password tidak sama!");
             return;
