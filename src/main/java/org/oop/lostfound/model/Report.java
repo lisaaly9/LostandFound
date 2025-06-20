@@ -21,6 +21,12 @@ public class Report {
         this.contact = contact;
     }
 
+    public int getReportId() {return reportId;}
+    public void setReportId(int reportId) {this.reportId = reportId;}
+
+    public String getItemName() {return itemName;}
+    public void setItemName(String itemName) {this.itemName=itemName;}
+
     public String getUser() {return user;}
     public void setUser(String user) {this.user = user;}
 
