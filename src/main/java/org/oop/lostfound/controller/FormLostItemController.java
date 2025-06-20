@@ -52,6 +52,16 @@ public class FormLostItemController {
     @FXML
     private void initialize() {
         categoryComboBox.getItems().setAll(Category.values());
+        // Batasi tanggal maksimal pada date picker
+        dateLostDatePicker.setDayCellFactory(picker -> new javafx.scene.control.DateCell() {
+            @Override
+            public void updateItem(java.time.LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (date.isAfter(java.time.LocalDate.now())) {
+                    setDisable(true);
+                }
+            }
+        });
     }
 
     @FXML
